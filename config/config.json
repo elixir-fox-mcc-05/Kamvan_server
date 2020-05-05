@@ -1,0 +1,9 @@
+{
+  "development": {
+    "username": "postgres",
+    "password": "Faris2198",
+    "database": "KamVan_db",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  }
+}
