@@ -2,7 +2,7 @@
 
 * **URL:**
 
-​			https://g-kanban.herokuapp.com/user/register
+​			/user/register
 
 * **Method:**
 
@@ -103,7 +103,7 @@
   ```
     axios({
               method:"POST",
-              url:"https://g-kanban.herokuapp.com/user/register",
+              url:"/user/register",
               data:{
                   username:this.form.username,
                   email:this.form.email,
@@ -122,7 +122,7 @@
 
 * **URL:**
 
-​			https://g-kanban.herokuapp.com/user/login
+​			/user/login
 
 * **Method:**
 
@@ -174,7 +174,7 @@
   ```
     axios({
         method:"POST",
-        url:"https://g-kanban.herokuapp.com/user/login",
+        url:"/user/login",
         data:{
             username:this.username,
             password:this.password
@@ -188,7 +188,7 @@
 
 * **URL:**
 
-​			http://localhost:3000/task/
+​			/task/
 
 * **Method:**
 
@@ -226,7 +226,7 @@
   ```
   axios({
       method:"POST",
-      url:"https://g-kanban.herokuapp.com/task",
+      url:"/task",
       data:{
           title: this.payload.title,
           description : this.payload.description
@@ -243,7 +243,7 @@
 
 * **URL:**
 
-​			https://g-kanban.herokuapp.com/task
+​			/task
 
 * **Method:**
 
@@ -326,7 +326,7 @@
   ```
   axios({
       method:"GET",
-      url:"https://g-kanban.herokuapp.com/task",
+      url:"/task",
       headers:{
       	token:localStorage.token
       }
@@ -341,9 +341,9 @@
 
 * **URL:**
 
-​			https://g-kanban.herokuapp.com/task/forward/:status/:id,
+​			/task/forward/:status/:id,
 
-​			https://g-kanban.herokuapp.com/task/backward/:status/:id
+​			/task/backward/:status/:id
 
 * **Method:**
 
@@ -398,7 +398,7 @@
   ```
   axios({
       method:"PUT",
-      url:"https://g-kanban.herokuapp.com/task/forward/"+status+"/"+id,
+      url:"/task/forward/"+status+"/"+id,
       headers:{
           token:localStorage.token
       }
@@ -406,7 +406,7 @@
   
   axios({
       method:"PUT",
-      url:"https://g-kanban.herokuapp.com/task/backward/"+status+"/"+id,
+      url:"/task/backward/"+status+"/"+id,
       headers:{
           token:localStorage.token
       }
@@ -419,7 +419,7 @@
 
 * **URL:**
 
-​			https://g-kanban.herokuapp.com/task/+id,
+​			/task/+id,
 
 * **Method:**
 
@@ -470,7 +470,7 @@
   ```
   axios({
       method:"DELETE",
-      url:"https://g-kanban.herokuapp.com/task/"+id,
+      url:"/task/"+id,
       headers:{
           token:localStorage.token
       }
