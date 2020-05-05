@@ -50,14 +50,13 @@ class TaskController {
     }
 
     static create(req, res, next) {
-        const { title, description, status, due_date } = req.body;
+        const { title, description, status } = req.body;
         const UserId = req.UserId;
 
         Task.create({
             title,
             description,
             status,
-            due_date,
             UserId
         })
             .then(task => {
@@ -91,14 +90,13 @@ class TaskController {
     }
 
     static update(req, res, next) {
-        const { title, description, status, due_date } = req.body;
+        const { title, description, status } = req.body;
         const { id } = req.params;
 
         Task.update({
             title: title,
             description: description,
-            status: status,
-            due_date: due_date
+            status: status
         }, {
             where: { id },
             returning: true
