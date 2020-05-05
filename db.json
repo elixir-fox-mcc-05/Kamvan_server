@@ -1,5 +1,10 @@
 {
     "back-log" : [
-        {"id" : 1, "title": "Asyiap","descriptions":"Doing Something", "point":10, "assigned to":"yodi" }
+        {"id": 1, "title": "more strugle more force more glory","descriptions":"Doing Something", "point":10, "assigned":"yodi" },
+        {"id": 2, "title": "elixir-fox","descriptions":"Doing Something", "point":10, "assigned":"test2" }
+    ],
+    "to-do": [
+        {"id": 1, "title": "corona AI","descriptions":"Doing Something", "point":10, "assigned":"test3"},
+        {"id": 2, "title": "Neural Network For Snake Game","descriptions":"Doing Something", "point":10, "assigned":"test4"}
     ]
 }
