@@ -1,3 +1,4 @@
+const {Todo} = require('../models')
 class TodoController{
 
     static add(req,res){
@@ -13,7 +14,7 @@ class TodoController{
     }
 
     static delete (req,res){
-        
+
     }
 }
 

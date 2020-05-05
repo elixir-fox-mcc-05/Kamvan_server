@@ -11,9 +11,12 @@ function authentication(req,res,next){
                 .findByPk(id)
                 .then(data => {
                     if(data){
-                        
+                        req.LoginId = data.id
+                        next()
                     }else{
-
+                        req.status(404).json({
+                            err : 'authentication data invalid, please login again'
+                        })
                     }
                 })
                 .catch(err => {
