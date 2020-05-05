@@ -1,4 +1,6 @@
-require('dotenv').config()
+if (process.env.NODE_ENV == 'dev') {
+  require('dotenv').config()
+}
 const PORT = process.env.PORT || 3000
 const express = require("express")
 const cors = require('cors')
@@ -11,5 +13,5 @@ app.use(express.json());
 
 app.use('/', routes)
 app.listen(PORT, () => {
-    console.log('Server Port : ' + PORT)
+  console.log('Server Port : ' + PORT)
 })
