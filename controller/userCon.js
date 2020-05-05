@@ -6,6 +6,7 @@ let { genToken } = require('../helpers/jwt.js')
 class UserCon {
     static login (req,res) {
         let {email,password} = req.body
+        console.log(req.body)
         User.findOne({
             where : {
                 email
@@ -23,19 +24,20 @@ class UserCon {
                     res.status(200).json({
                         token
                     })
+                    console.log(token)
                 } else {
-                    res.status(500).json({
+                    res.status(400).json({
                         msg : 'wrong email/password'
                     })
                 }
             } else {
-                res.status(500).json({
+                res.status(400).json({
                     msg : 'wrong email/password'
                 })
             }
         })
         .catch(err=>{
-            res.status(500).json({
+            res.status(400).json({
                 msg : 'wrong email/password'
             })
         })
@@ -46,7 +48,7 @@ class UserCon {
 
         if(password!=confirm_password) {
             res.status(400).json({
-                msg : "password doesn't match with confirm password "
+                error : "password doesn't match with confirm password "
             })
         } else {
             User.create({
@@ -55,7 +57,7 @@ class UserCon {
             })
             .then(result=>{
                 res.status(201).json({
-                    msg : 'success register',
+                    msg : 'successfully register',
                     result
                 })
             })
