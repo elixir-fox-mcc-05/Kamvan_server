@@ -12,7 +12,7 @@ class TasksController {
                 as: 'AssigneeDetail',
                 attributes: ['id', 'name', 'email']
             }],
-            order: [['priority', 'DESC']],
+            order: [['deadline', 'ASC']],
         })
             .then(data => {
                 res.status(200).json({

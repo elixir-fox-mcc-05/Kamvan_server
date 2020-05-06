@@ -6,7 +6,7 @@ module.exports = {
       {
         title: 'Project 1',
         description: 'project-1 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam',
-        category: 'Backlog',
+        category: 'Back-Log',
         priority: 'Normal',
         deadline: '2021-07-07',
         AssignorId: 1,
@@ -50,7 +50,7 @@ module.exports = {
       {
         title: 'Project 5',
         description: 'project-5 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam',
-        category: 'Backlog',
+        category: 'Back-Log',
         priority: 'Important',
         deadline: '2021-12-12',
         AssignorId: 4,
@@ -72,7 +72,7 @@ module.exports = {
       {
         title: 'Project 7',
         description: 'project-7 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam',
-        category: 'Backlog',
+        category: 'Back-Log',
         priority: 'Urgent',
         deadline: '2021-06-19',
         AssignorId: 8,

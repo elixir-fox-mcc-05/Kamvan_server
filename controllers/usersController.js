@@ -1,4 +1,4 @@
-const { User } = require('../models/index')
+const { User, Task } = require('../models/index')
 const { comparePassword } = require('../helpers/bcrypt')
 const { generateToken } = require('../helpers/jwt')
 // const googleVerification = require('../helpers/googleOauthApi')
@@ -54,6 +54,21 @@ class UsersController {
                         code: 401
                     }
                 }
+            })
+            .catch(err => {
+                next(err)
+            })
+    }
+
+    static getAll(req, res, next) {
+        User.findAll({
+            attributes: ['id', 'name', 'email'],
+            order: [['name', 'ASC']],
+        })
+            .then(data => {
+                res.status(200).json({
+                    Users: data
+                })
             })
             .catch(err => {
                 next(err)

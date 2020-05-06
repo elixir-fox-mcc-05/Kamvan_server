@@ -11,7 +11,7 @@ router.get('/', (req, res) => {
         msg: 'masuk'
     })
 });
-// router.use('/users', usersRouter);
+router.use('/users', usersRouter);
 router.use('/tasks', tasksRouter);
 
 module.exports = router;
