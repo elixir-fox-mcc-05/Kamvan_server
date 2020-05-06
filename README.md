@@ -140,6 +140,16 @@
 
   `none`
 
+- **Data Params**
+
+  **Required:**
+
+  `username:string`
+
+  `email:string`
+
+  `password:string`
+
 - **Success Response:**
 
   - **Code:** 200 
@@ -206,6 +216,14 @@
 
   `token=[string]`
 
+- **Data Params**
+
+  **Required:**
+
+  `title: string`
+
+  `description: string`
+
 - **Success Response:**
 
   - **Code:** 200 
@@ -260,7 +278,6 @@
   **Required:**
 
    ` token : [string]
-   
   
 - **Success Response:**
 
@@ -333,11 +350,89 @@
   })
   ```
 
-
-
-
-
 ## **Update Task**
+
+* **URL:**
+
+​			/task/:id
+
+* **Method:**
+
+​		`PUT`
+
+- **URL Params**
+
+  **Required:**
+
+  `id:[integer]`
+
+- **Data Headers**
+
+  **Required:**
+
+   ` token:[string]`
+
+- **Data Params**
+
+  **Required:**
+
+  `id: Integer`
+
+  `title: string`
+
+  `description: string`
+
+- **Required:**
+
+- **Success Response:**
+
+  - **Code:** 200 
+    **Content:** 
+
+    ```json
+    {
+      "msg": "Update success",
+      "data": [
+        1
+      ]
+    }
+    ```
+
+- **Error Response:**
+
+  - **Code:** 401 unauthorized
+    **Content:** 
+
+    ```json
+    {
+      "message": "Unauthorized",
+      "errors": "User Not authorized"
+    }
+    ```
+
+    
+
+- **Sample Call:**
+
+  ```
+  axios({
+      method:"PUT",
+      url:"/task/+id,
+      headers:{
+          token:localStorage.token
+      },
+      data:{
+          title: string,
+          description : string
+      }
+  })
+  
+  ```
+
+
+
+
+## **Update Status Task**
 
 * **URL:**
 

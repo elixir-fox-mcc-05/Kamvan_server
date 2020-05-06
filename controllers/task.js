@@ -72,13 +72,13 @@ class Controller {
         })
         .then(result=>{
             res.status(200).json({
-                msg:'Update status success',
+                msg:'Update success',
                 data:result
             })
         })
         .catch(err=>{
             res.status(400).json({
-                msg:'Update status failed',
+                msg:'Update failed',
                 data:err
             })
         })
