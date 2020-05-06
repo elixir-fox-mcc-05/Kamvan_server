@@ -27,7 +27,10 @@ class UserController {
         msg: 'Verify password missmatch'
       })
       .catch(err => {
-        next(err)
+        next({
+          name: 'BadRequest',
+          msg: 'Verify password missmatch'
+        })
       })
   }
 
