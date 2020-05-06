@@ -22,7 +22,7 @@ class UserController {
             'access_token': access_token
           })
         })
-    } else return res.status(400).json({
+    } else next({
         name: 'BadRequest',
         msg: 'Verify password missmatch'
       })
