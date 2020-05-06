@@ -29,7 +29,7 @@ class UserController {
       .catch(err => {
         next({
           name: 'BadRequest',
-          msg: 'Verify password missmatch'
+          msg: 'Data Mismatch'
         })
       })
   }
