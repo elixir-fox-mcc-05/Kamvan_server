@@ -22,13 +22,13 @@ class UserController {
             'access_token': access_token
           })
         })
-        .catch(err => {
-          next(err)
-        })
     } else next({
-      name: 'BadRequest',
-      msg: 'Verify password missmatch'
-    })
+        name: 'BadRequest',
+        msg: 'Verify password missmatch'
+      })
+      .catch(err => {
+        next(err)
+      })
   }
 
   static login(req, res, next) {
