@@ -22,15 +22,12 @@ class UserController {
             'access_token': access_token
           })
         })
-    } else return next({
+    } else return res.status(200).json({
         name: 'BadRequest',
         msg: 'Verify password missmatch'
       })
       .catch(err => {
-        next({
-          name: 'BadRequest',
-          msg: 'Data Mismatch'
-        })
+        next(err)
       })
   }
 
