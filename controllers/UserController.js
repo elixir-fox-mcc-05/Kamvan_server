@@ -22,7 +22,7 @@ class UserController {
             'access_token': access_token
           })
         })
-    } else next({
+    } else return next({
         name: 'BadRequest',
         msg: 'Verify password missmatch'
       })
