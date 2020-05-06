@@ -8,11 +8,31 @@ module.exports = (sequelize, DataTypes) => {
   Kanban.init({
     title: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
+      validate: {
+        notEmpty: {
+          args: true,
+          msg: "Title cannot be empty"
+        },
+        notNull: {
+          args: true,
+          msg: "Title cannot be null"
+        }
+      }
     },
     description: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
+      validate: {
+        notEmpty: {
+          args: true,
+          msg: "Description cannot be empty"
+        },
+        notNull: {
+          args: true,
+          msg: "Description cannot be null"
+        }
+      }
     },
     tag: DataTypes.STRING,
     userId: DataTypes.INTEGER
