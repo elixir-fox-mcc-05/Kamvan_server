@@ -8,7 +8,12 @@ module.exports = (sequelize, DataTypes) => {
   Task.init({
     title: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
+      validate: {
+        notEmpty: {
+          msg: 'Task title can\'t be empty'
+        }
+      }
     },
     description: {
       type: DataTypes.STRING,
@@ -16,11 +21,30 @@ module.exports = (sequelize, DataTypes) => {
     },
     category: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
+      validate: {
+        notEmpty: {
+          msg: 'Task category can\'t be empty'
+        }
+      }
     },
     due_date: {
       type: DataTypes.DATE,
-      allowNull: false
+      allowNull: false,
+      validate:{
+        notEmpty: {
+          msg: 'Task due_date can\'t be empty'
+        },
+        isDate: {
+          msg: 'Wrong date format'
+        },
+        isFuture(task) {
+          let today = new Date();
+          if(task.due_date < today) {
+            throw ('Its either today or future data for due_date')
+          }
+        }
+      }
     },
     UserId: {
       type: DataTypes.INTEGER,
