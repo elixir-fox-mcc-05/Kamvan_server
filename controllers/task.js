@@ -57,6 +57,32 @@ class Controller {
         })
     }
 
+    static updateTask(req,res){
+        let id = req.params.id
+        const {title,description} = req.body       
+        console.log(title,description,id);
+        
+        Task.update({
+            title,
+            description
+        },{
+            where:{
+                id:id
+            }
+        })
+        .then(result=>{
+            res.status(200).json({
+                msg:'Update status success',
+                data:result
+            })
+        })
+        .catch(err=>{
+            res.status(400).json({
+                msg:'Update status failed',
+                data:err
+            })
+        })
+    }
     static updateStatusForwared(req,res){
         let id = req.params.id
         let status 
