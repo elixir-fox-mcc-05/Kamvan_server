@@ -20,6 +20,12 @@ module.exports = {
       UserId: {
         type: Sequelize.INTEGER
       },
+      UserEmail: {
+        type: Sequelize.STRING
+      },
+      UserOrganization: {
+        type: Sequelize.STRING
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

@@ -15,12 +15,14 @@ module.exports = (sequelize, DataTypes) => {
         }
       }
     },
-    description: DataTypes.TEXT, // kosong = undefined 
+    description: DataTypes.TEXT, // kosong = undefined
     category: {
       type: DataTypes.STRING,
       defaultValue: 'Back Log'
     },
-    UserId: DataTypes.INTEGER
+    UserId: DataTypes.INTEGER,
+    UserEmail: DataTypes.STRING,
+    UserOrganization: DataTypes.STRING
   }, {
     sequelize,
     modelName: 'Task'

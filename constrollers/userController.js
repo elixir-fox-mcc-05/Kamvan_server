@@ -47,7 +47,7 @@ class UserController {
                     throw next({
                         name: `BadRequest`,
                         errors: [{
-                            msg: `Invalid E-Mail/Password`
+                            message: `Invalid E-Mail/Password`
                         }]
                     })
                 }
@@ -56,7 +56,7 @@ class UserController {
                 throw next({
                     name: `BadRequest`,
                     errors: [{
-                        msg: `Invalid E-Mail/Password`
+                        message: `Invalid E-Mail/Password`
                     }]
                 })
             }
