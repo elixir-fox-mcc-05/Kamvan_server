@@ -6,8 +6,14 @@ module.exports = (sequelize, DataTypes) => {
   class Kanban extends Model {}
 
   Kanban.init({
-    title: DataTypes.STRING,
-    description: DataTypes.STRING,
+    title: {
+      type: DataTypes.STRING,
+      allownull: false
+    },
+    description: {
+      type: DataTypes.STRING,
+      allownull: false
+    },
     tag: DataTypes.STRING,
     userId: DataTypes.INTEGER
   }, {
