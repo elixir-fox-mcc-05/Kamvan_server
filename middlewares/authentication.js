@@ -11,6 +11,7 @@ function authentication (req, res, next) {
             .then(user => {
                 if (user) {
                     req.currentUserId = id;
+                    req.currentOrganization = user.organization;
                     next();
                 } else {
                     next({

@@ -4,17 +4,18 @@ const { generateToken } = require('../helpers/jsonwebtoken.js');
 
 class UserController {
     static register(req, res, next) {
-        const { email, password, name } = req.body;
-        console.log(email, password)
+        const { email, password, name, organization } = req.body;
+        console.log(email, password, organization)
         const values = {
             email,
             password,
-            name
+            name,
+            organization
         };
         User
             .create(values)
                 .then(user => {
-                    res.status(201).json({ id: user.id, email: user.email });
+                    res.status(201).json({ id: user.id, email: user.email, organization: user.organization });
                 })
                 .catch(err => {
                     next(err)

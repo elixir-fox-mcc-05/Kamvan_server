@@ -34,15 +34,9 @@ module.exports = (sequelize, DataTypes) => {
         }
       }
     },
-    UserId: {
-      type: DataTypes.INTEGER,
-      validate: {
-        notEmpty: {
-          args: true,
-          msg: 'Assigned To tidak boleh kosong'
-        }
-      }
-    }
+    UserId: { type: DataTypes.INTEGER },
+    organization: DataTypes.STRING
+    
   }, {
     sequelize,
     modelName: 'Kanban'

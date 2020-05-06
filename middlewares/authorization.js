@@ -1,11 +1,11 @@
-const { Todo } = require('../models');
+const { Kanban } = require('../models');
 
 function authorization(req, res, next) {
-    let { id } = req.params
-    Todo.findByPk(id)
-        .then(todo => {
-            if (todo) {
-                if (todo.UserId === req.currentUserId) {
+   let id = req.params.kanbanid
+    Kanban.findByPk(id)
+        .then(kanban => {
+            if (kanban) {
+                if (kanban.UserId === req.currentUserId) {
                     next()
                 } else {
                     next({
