@@ -8,11 +8,11 @@ module.exports = (sequelize, DataTypes) => {
   Kanban.init({
     title: {
       type: DataTypes.STRING,
-      allownull: false
+      allowNull: false
     },
     description: {
       type: DataTypes.STRING,
-      allownull: false
+      allowNull: false
     },
     tag: DataTypes.STRING,
     userId: DataTypes.INTEGER
