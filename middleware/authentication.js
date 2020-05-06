@@ -1,17 +1,18 @@
 const {verifyToken} = require('../helpers/jwt')
 const {User} = require('../models')
 function authentication(req,res,next){
-    let token = req.header.token
+    let token = req.headers.token
     try{
         if(token){
             let decodeid = verifyToken(token)
-            let {id} = decodeid
-
+            let {id} = decodeid.data
+            // console.log(decodeid)
             User
                 .findByPk(id)
                 .then(data => {
                     if(data){
                         req.LoginId = data.id
+                        req.SelectOrganization = data.organization 
                         next()
                     }else{
                         req.status(404).json({

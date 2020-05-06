@@ -1,9 +1,9 @@
-const {Todo} = require('../models')
+const {Task} = require('../models')
 
 function authorization(req,res,next){
 
-    Todo
-        .findOne({where : {id : req.params.id}})
+    Task
+        .findByPk(req.params.id)
         .then(data => {
             if(data){
                 if(data.UserId == req.LoginId){

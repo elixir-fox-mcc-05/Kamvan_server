@@ -1,18 +1,19 @@
 const {User} = require('../models')
-
+const {encrypt,compare} = require('../helpers/bcrypt')
+const {generateToken} = require('../helpers/jwt')
 
 class UserController{
 
     static login(req,res,next){
-        // let {email,password} = req.body
+        let {email,password} = req.body
 
         User
-            .findOne({where : {email : req.body.email}})
+            .findOne({where : {email}})
             .then(data => {
                 if(data) {
-                    if(req.body.password == data.password){
+                    if(password == data.password){
                         res.status(200).json({
-                            token
+                            token : generateToken({data})
                         })
                     }
                 }else {
@@ -26,21 +27,83 @@ class UserController{
             })
     }
 
-    static register(){
-        let {email,password} = req.body
-
+    static register(req,res,next){
+        let {first_name, last_name, password, email, organization} = req.body
+        let newUser = {first_name, last_name, password,email , organization}
+        // console.log(newUser)
         User
-            .create({email,password})
+            .create(newUser)
             .then(data => {
+              console.log('test')
                 res.status(201).json({
                     id : data.id,
-                    email : data.email
+                    first_name : data.first_name,
+                    last_name : data.last_name,
+                    email : data.email,
+                    organization : data.organization
                 })
             })
             .catch(err => {
-                next(err)
+                // console.log(err)
+                res.status(404).json({
+                  
+                  error : err.message.split(',')
+                })
             })
     }
+
+    static googleLogin(req,res,next){
+            let google_token = req.headers.google_token;
+            let email = null;
+            let newUser = false;
+            let first_name = null;
+            let last_name = null
+        
+            googleVerification(google_token)
+              .then(payload => {
+                email = payload.email;
+                first_name = payload.given_name;
+                last_name = payload.family_name;
+                // console.log('payload: ', payload)
+                // console.log('emaul: ', email)
+                return User
+                  .findOne({
+                    where: {
+                      email
+                    }
+                  })
+              })
+              .then(user => {
+                if (user) {
+                  return user;
+                } else {
+                  newUser = true;
+                  return User
+                    .create({
+                        first_name,
+                        last_name,
+                      email,
+                      password: process.env.DEFAULT_GOOGLE_PASSWORD
+                    });
+                }
+              })
+              .then(user => {
+                let code = newUser ? 201 : 200;
+        
+                const token = generateToken({
+                  id: user.id,
+                  email: user.email
+                });
+        
+                res.status(code).json({
+                  token
+                });
+              })
+              .catch(err => {
+                next(err);
+              })
+     }
+    
 }
 
 module.exports = UserController

@@ -23,6 +23,9 @@ module.exports = {
       points: {
         type: Sequelize.INTEGER
       },
+      organization : {
+        type : Sequelize.STRING
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

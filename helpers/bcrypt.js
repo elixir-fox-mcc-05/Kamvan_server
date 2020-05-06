@@ -1,11 +1,13 @@
 const brypt = require('bcryptjs')
 
-function encrypt (password){
-    brypt.hash(password,5)
+module.exports = { encrypt : (password) => {
+    const salt = brypt.genSaltSync(process.env.SALT)
+    // console.log(salt)
+   return brypt.hashSync(password,salt)
+},
+
+compare : (password,cryptpassword) => {
+    return brypt.compareSync(password,cryptpassword)
 }
 
-function decrypt (password,cryptpassword){
-    brypt.compareSync(password,cryptpassword)
 }
-
-module.exports = {encrypt,decrypt}

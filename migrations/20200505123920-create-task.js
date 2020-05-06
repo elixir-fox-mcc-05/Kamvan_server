@@ -1,7 +1,7 @@
 'use strict';
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('Todos', {
+    return queryInterface.createTable('Tasks', {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -14,8 +14,17 @@ module.exports = {
       points: {
         type: Sequelize.INTEGER
       },
+      category: {
+        type: Sequelize.STRING
+      },
       description: {
         type: Sequelize.STRING
+      },
+      done : {
+        type : Sequelize.BOOLEAN
+      },
+      organization : {
+        type : Sequelize.STRING
       },
       createdAt: {
         allowNull: false,
@@ -28,6 +37,6 @@ module.exports = {
     });
   },
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('Todos');
+    return queryInterface.dropTable('Tasks');
   }
 };

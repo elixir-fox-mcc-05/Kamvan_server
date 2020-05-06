@@ -47,7 +47,7 @@ error :
 
 URL
 
-'/todos/list'
+'/tasks/list'
 
 HTTP Method : GET
 
@@ -67,13 +67,15 @@ response:
 
 URL 
 
-'/todos/update/:id'
+'/tasks/update/:id'
 
 HTTP Method : PUT
 
 Request:
 
 Headers : token=[string]
+
+Params : id = [integer]
 
 response 
 
@@ -92,13 +94,37 @@ error :
 
 URL
 
-'/todos/delete/:id'
+'/tasks/delete/:id'
 
 HTTP Method : DELETE
 
 Request
 
 Headers : token=[string]
+
+Params : id - [integer]
+
+response: 
+
+200 : { id : 1,
+        title : 'beli sayur',
+        status : 'process',
+        UserId : 12
+        }
+
+--------------------------------------------------------------------------------------------------------------
+
+URL
+
+'/tasks/:id'
+
+HTTP Method : GET
+
+Request
+
+Headers : token=[string]
+
+Params : id=[integer]
 
 response: 
 
