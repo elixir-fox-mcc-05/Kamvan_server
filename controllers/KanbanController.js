@@ -33,7 +33,7 @@ class KanbanController {
       .catch(err => {
         next({
           "name": "InternalServer",
-          "msg": "Internal Server Error"
+          errors: [{ msg: 'Internal Server Error' }]
         })
       })
   }
@@ -48,7 +48,7 @@ class KanbanController {
       .then(data => {
         if (!data) next({
           "name": "NotFound",
-          "msg": "Data not found"
+          errors: [{ msg: 'Data not Found' }]
         })
         else {
           Kanban.update(updatedData, { where: { id: data.id } })
@@ -60,7 +60,7 @@ class KanbanController {
       .catch(err => {
         next({
           "name": "InternalServer",
-          "msg": "Internal Server Error"
+          errors: [{ msg: 'Internal Server Error' }]
         })
       })
   }
@@ -72,7 +72,7 @@ class KanbanController {
         return res.status(201).json({ msg: 'Success Delete' })
       })
       .catch((err) => {
-        next({ name: 'NotFound', msg: 'Data not Found' })
+        next({ name: 'NotFound', errors: [{ msg: 'Data not Found' }] })
       })
   }
 }

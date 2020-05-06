@@ -24,7 +24,7 @@ class UserController {
         })
     } else next({
         name: 'BadRequest',
-        msg: 'Verify password missmatch'
+        errors: [{ msg: 'Verify Password Mismatch' }]
       })
       .catch(err => {
         next(err)
@@ -43,12 +43,18 @@ class UserController {
             return res.status(200).json({
               'access_token': access_token
             })
-          } else next({ name: 'BadRequest', msg: 'Wrong email/password' })
+          } else next({
+            name: 'BadRequest',
+            errors: [{ msg: 'Invalid Email/Password' }]
+          })
 
-        } else next({ name: 'BadRequest', msg: 'Wrong email/password' })
+        } else next({
+          name: 'BadRequest',
+          errors: [{ msg: 'Invalid Email/Password' }]
+        })
       })
       .catch(err => {
-        next({ name: 'NotFound', msg: 'User Not found' })
+        next(err)
       })
   }
 }
