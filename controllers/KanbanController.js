@@ -3,9 +3,9 @@ const { User } = require('../models');
 
 class KanbanController {
     static create(req, res, next) {
-        let { title, description, point, organization } = req.body;
-        const status = 'Backlog';
+        let { title, description, point, status } = req.body;
         const UserId = req.currentUserId;
+        const organization = req.currentOrganization;
         const values = {
             title, 
             description,
@@ -27,7 +27,6 @@ class KanbanController {
     static findAll(req, res, next) {
         const options = {
             OrderBy: 'id',
-            // include: { model: User, attributes: { exclude: ["password"] }, required: false },
             where: {
                 organization: 'Hacktiv8'
             }
@@ -43,9 +42,8 @@ class KanbanController {
     }
 
     static update(req, res, next) {
-        let { title, description, point } = req.body;
+        let { title, description, point, status } = req.body;
         let kanbanId = req.params.kanbanid;
-        console.log(title, description, point, kanbanId)
         const options = {
             where : {
                 id: kanbanId
@@ -55,7 +53,8 @@ class KanbanController {
         const values = {
             title,
             description,
-            point
+            point, 
+            status
         };
         Kanban
             .update(values, options)
@@ -68,7 +67,7 @@ class KanbanController {
     }
 
     static delete(req, res, next) {
-        let kanbanId = req.currentUserId;
+        let kanbanId = req.params.kanbanid;
         const options = {
             where: {
                 id: kanbanId

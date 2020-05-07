@@ -1,7 +1,7 @@
 const { Kanban } = require('../models');
 
 function authorization(req, res, next) {
-   let id = req.params.kanbanid
+   let id = req.params.kanbanid;
     Kanban.findByPk(id)
         .then(kanban => {
             if (kanban) {
