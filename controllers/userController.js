@@ -56,6 +56,11 @@ class UserController {
                         code: 400
                     }
                 }
+            } else {
+                throw {
+                    msg: "Looks like you have not registered",
+                    code: 401
+                }
             }
         })
         .catch(err => {
