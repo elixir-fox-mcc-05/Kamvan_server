@@ -5,7 +5,11 @@ class TaskController {
     static findAll(req, res, next){
         const {category} = req.params;
         Task
-            .findAll()
+            .findAll({
+                where : {
+                    category,
+                }
+            })
             .then(task => {
                 if(task){
                     res.status(200).json({
@@ -92,13 +96,20 @@ class TaskController {
     static edit(req, res, next){
         const {id} = req.params;
         const {title, descriptions, point, assigned, category} = req.body;
-        const value = {
-            title,
-            descriptions,
-            point,
-            assigned,
-            category
-        };
+        let value;
+        if(!category){
+            value = {
+                title,
+                descriptions,
+                point,
+                assigned,
+                category
+            };
+        } else {
+            value = {
+                category,
+            };
+        }
         Task
             .update(value, {
                 where : {
@@ -134,7 +145,7 @@ class TaskController {
                     id
                 }
             })
-            .then(tasl => {
+            .then(task => {
                 res.status(200).json({
                     msg : `Completely destroy data with id ${id}`
                 });

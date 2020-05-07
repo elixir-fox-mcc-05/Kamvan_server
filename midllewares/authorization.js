@@ -3,14 +3,15 @@ const {Task} = require('../models');
 
 function Authorization(req, res, next){
     const UserId = req.currentUser;
-    const id = req.params;
+    const {id} = req.params;
     Task
         .findByPk(id)
         .then(task => {
+            console.log(task);
             if(task) {
                 next();
             } else {
-                return res.status(400).json({
+                return res.status(401).json({
                     code : 401,
                     type : "Unauthorized",
                     msg : "You are not allowed to do this"

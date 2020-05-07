@@ -31,12 +31,15 @@ class UserController {
                 res.status(500).json({
                     code : 500,
                     type : "Internal Server Error",
-                    msg : "Something Went Wrong"
+                    msg : "Something Went Wrong",
+                    err: err
                 });
             });
     }
     static login(req, res, next) {
-        const {email, password} = req.body;
+        const email = req.body.email;
+        const password = req.body.password;
+        console.log(req);
         User
             .findOne({
                 where:{
@@ -63,10 +66,13 @@ class UserController {
             })
             .catch(err => {
                 res.status(500).json({
-                    code: 500,
-                    type : "Internal Server Error",
-                    msg : "Something Went Wrong"
+                   error : err,
                 });
+                // res.status(500).json({
+                //     code: 500,
+                //     type : "Internal Server Error",
+                //     msg : "Something Went Wrong"
+                // });
             });
     }
 }
