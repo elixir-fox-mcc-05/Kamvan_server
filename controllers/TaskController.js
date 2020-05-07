@@ -4,12 +4,9 @@ class TaskController {
   static findAll(req, res, next) {
     let UserId = req.UserId;
     Task.findAll({
-      where: {
-        UserId
-      },
       include: {
         model: User,
-        attributes: ["id", "email"]
+        attributes: ['id', 'email']
       }
     })
       .then(data => {
@@ -22,14 +19,15 @@ class TaskController {
       });
   }
   static createTask(req, res, next) {
-    let { title, description, points, categoryId } = req.body;
+    let { title, description, points, categoryId, assigned_to } = req.body;
     let UserId = req.UserId;
     Task.create({
       title,
       description,
       points,
       categoryId,
-      UserId
+      UserId,
+      assigned_to
     })
       .then(data => {
         res.status(201).json({
@@ -41,23 +39,36 @@ class TaskController {
       });
   }
   static updateTask(req, res, next) {
-    let { title, description, points, categoryId } = req.body;
+    let { title, description, points, categoryId, assigned_to } = req.body;
     let id = req.params.id;
-    Task.update({
-      title,
-      description,
-      points,
-      CategoryId: categoryId
-    }, {
-      where: {
-        id
+    Task.update(
+      {
+        title,
+        description,
+        points,
+        assigned_to,
+        CategoryId: categoryId
       },
-      returning: true
-    })
+      {
+        where: {
+          id
+        },
+        returning: true
+      }
+    )
       .then(result => {
-        res.status(200).json({
-          Task: result
-        });
+        console.log(result);
+        if (result[0] > 0) {
+          res.status(200).json({
+            Task: result[1][0]
+          });
+        } else {
+          return next({
+            code: 404,
+            name: '404NotFoundError',
+            msg: `Data Not Found`
+          });
+        }
       })
       .catch(err => {
         return next(err);
@@ -68,18 +79,18 @@ class TaskController {
     let deletedData;
     Task.findByPk(id)
       .then(data => {
-        if(data) {
+        if (data) {
           deletedData = data;
           return Task.destroy({
             where: {
               id
             }
-          })
+          });
         } else {
           return next({
             code: 404,
             message: `Task Not Found`
-          })
+          });
         }
       })
       .then(result => {
@@ -89,7 +100,7 @@ class TaskController {
       })
       .catch(err => {
         return next(err);
-      })
+      });
   }
 }
 
