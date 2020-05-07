@@ -5,15 +5,21 @@ const { generateToken } = require('../helpers/jwt')
 
 class UsersController {
     static register (req, res, next) {
-        let {name, email, password} = req.body
+        let {name, email, password, organization} = req.body
         User.create({
             name,
             email,
-            password
+            password,
+            organization
         })
             .then(data => {
                 res.status(201).json({
-                    User: data,
+                    User: {
+                        id: data.id,
+                        name: data.name,
+                        email: data.email,
+                        organization: data.organization
+                    },
                     notif: 'Register successful!'
                 })
             })
@@ -40,6 +46,11 @@ class UsersController {
                         })
                         res.status(201).json({
                             token,
+                            user: {
+                                id: data.id,
+                                name: data.name,
+                                email: data.email    
+                            },
                             notif: `Welcome Back ${data.name}!`
                         })        
                     } else {

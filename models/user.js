@@ -36,7 +36,9 @@ module.exports = (sequelize, DataTypes) => {
     sequelize,
     hooks: {
       beforeCreate: (user) => {
-        user.organization = 'Hacktiv8'
+        if(!user.organization || user.organization == '' || user.organization == ' ') {
+          user.organization = 'Hacktiv8'
+        }
         user.password = encryptPassword(user.password)
       }
     }

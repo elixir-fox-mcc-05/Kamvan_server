@@ -122,22 +122,19 @@ class TasksController {
             })
     }
 
-    static changeStatus(req, res, next) {
+    static changeCategory(req, res, next) {
         let { id } = req.params
-        Task.findByPk(id)
-            .then(task => {
-                let status = task.status ? false : true
-                return Task.update({
-                    status
-                }, {
-                    where: {
-                        id
-                    }
-                })
-            })
+        let { category } = req.body
+        Task.update({
+            category
+        }, {
+            where: {
+                id
+            }
+        })
             .then(() => {
                 res.status(200).json({
-                    notif: `Status of Task successfully changed!`
+                    notif: `Category of Task successfully changed!`
                 })
             })
             .catch(err => {
