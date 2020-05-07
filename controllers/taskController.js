@@ -9,7 +9,7 @@ class TaskController {
         Task
             .create({ title, points, description,category, organization : req.SelectOrganization, UserId : req.LoginId })
             .then(data => {
-                console.log('add nyo')
+                // console.log('add nyo')
                 res.status(201).json({
                     id : data.id,
                     title : data.title,
