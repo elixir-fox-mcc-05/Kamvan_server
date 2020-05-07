@@ -8,13 +8,13 @@ function authorization(req, res, next){
     })
     .then(result => {
         if(result) {
-            if(result.UserId == req.currentUserId){
+            if(result.UserId == req.currentUserId && result.organization == req.currentOrganization){
                 return next()
             }
             else {
                 return next({
                     name : 'Unauthorized',
-                    errors: [{message: "User not authorized"}]
+                    errors: [{message: "You are not authorized"}]
                 })
             }
         }

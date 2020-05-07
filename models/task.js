@@ -9,6 +9,10 @@ module.exports = (sequelize, DataTypes) => {
         notNull: {
           args: true,
           msg: 'Title must be inputted'
+        },
+        notEmpty: {
+          args: true,
+          msg: 'Title must be inputted'
         }
       }
     },
@@ -16,11 +20,14 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       defaultValue: 'backlog'
     },
-    UserId: DataTypes.INTEGER
+    assignedTo: DataTypes.STRING,
+    UserId: DataTypes.INTEGER,
+    organization: DataTypes.STRING
   }, {
     sequelize,
     modelName: 'Task'
   })
+
   Task.associate = function(models) {
     Task.belongsTo(models.User, {foreignKey: 'UserId'})
   };

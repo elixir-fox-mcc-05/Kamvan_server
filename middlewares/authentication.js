@@ -3,7 +3,7 @@ const { verify } = require('../helpers/jwt')
 
 function authentication(req, res, next){
     try{
-        let decoded = verify(req.headers, access_token)
+        let decoded = verify(req.headers.access_token)
         User.findOne({
             where: {
                 id: decoded.id
@@ -12,6 +12,7 @@ function authentication(req, res, next){
         .then(result => {
             if(result){
                 req.currentUserId = result.id
+                req.currentOrganization = result.organization
                 next()
             }
             else {

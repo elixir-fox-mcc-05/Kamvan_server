@@ -17,6 +17,10 @@ module.exports = (sequelize, DataTypes) => {
         notNull: {
           args: true,
           msg: 'Email must be inputted'
+        },
+        notEmpty: {
+          args: true,
+          msg: 'Email must be inputted'
         }
       }
     } ,
@@ -31,6 +35,10 @@ module.exports = (sequelize, DataTypes) => {
         notNull: {
           args: true,
           msg: 'Password must be inputted'
+        },
+        notEmpty: {
+          args: true,
+          msg: 'Password must be inputted'
         }
       }
     } ,
@@ -43,7 +51,7 @@ module.exports = (sequelize, DataTypes) => {
     modelName: 'User',
     hooks: {
       beforeCreate(user, options){
-        this.password = encryptPassword(this.password)
+        user.password = encryptPassword(user.password)
       }
     }
   });
