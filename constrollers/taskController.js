@@ -72,7 +72,7 @@ class TaskController {
         }
         Task.update(input, options)
             .then (data => {
-                return res.status(200).json({task: data[1][0]});
+                return res.status(200).json({task: data[1][0], message: `Task ${taskId} update`});
             })
             .catch(err => {
                 return next(err);
@@ -90,7 +90,7 @@ class TaskController {
         }
         Task.destroy(options)
             .then(_ => {
-                return res.status(200).json({message: `task ${taskId} deleted`})
+                return res.status(200).json({message: `Task ${taskId} delete`})
             })
             .catch(err => {
                 return next(err);
