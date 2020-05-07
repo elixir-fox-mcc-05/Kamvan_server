@@ -1,4 +1,4 @@
-const brypt = require('bcryptjs')
+const brypt = require('bcrypt')
 
 module.exports = { encrypt : (password) => {
     const salt = brypt.genSaltSync(process.env.SALT)
