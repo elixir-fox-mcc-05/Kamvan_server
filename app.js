@@ -6,11 +6,11 @@
 
 require('dotenv').config()
 
-const express = require('express')
-const cors = require('cors')
-const PORT = process.env.PORT
-const router = require('./routers')
-const handler = require('./middlewares/errorHandler')
+const express = require('express');
+const cors = require('cors');
+const PORT = process.env.PORT;
+const router = require('./routers');
+const handler = require('./middlewares/errorHandler');
 const app = express()
 
 app.use(cors())

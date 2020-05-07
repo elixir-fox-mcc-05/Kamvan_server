@@ -39,8 +39,6 @@ class UserController {
         .then(user => {
             if (user) {
                 const { id, name, email, organization} = user
-                console.log(user);
-                
 
                 if (verifyPassword(password, user.password)) {
                     let access_token = generateToken({
