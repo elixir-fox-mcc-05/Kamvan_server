@@ -5,5 +5,19 @@
     "database": "kamvan_db",
     "host": "localhost",
     "dialect": "postgres"
+  },
+  "test": {
+    "username": "ahmadalhq",
+    "password": "empatpuluh6",
+    "database": "kamvan_db",
+    "host": "localhost",
+    "dialect": "postgres"
+  },
+  "production": {
+    "username": "ahmadalhq",
+    "password": "empatpuluh6",
+    "database": "kamvan_db",
+    "host": "localhost",
+    "dialect": "postgres"
   }
 }
