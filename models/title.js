@@ -22,6 +22,8 @@ module.exports = (sequelize, DataTypes) => {
   Title.associate = function(models) {
     // associations can be defined here
     Title.belongsTo(models.User)
+    Title.belongsTo(models.Status)
+
   };
   return Title;
 };

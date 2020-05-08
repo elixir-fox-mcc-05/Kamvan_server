@@ -1,0 +1,22 @@
+[
+    {
+        "name" : "Back-Log",
+        "color" : "bg-danger",
+        "btnColor" : "btn-danger"
+    },
+    {
+        "name" : "Todo",
+        "color" : "bg-warning",
+        "btnColor" : "btn-warning"
+    },
+    {
+        "name" : "Doing",
+        "color" : "bg-primary",
+        "btnColor" : "btn-primary"
+    },
+    {
+        "name" : "Done",
+        "color" : "bg-success",
+        "btnColor" : "btn-success"
+    }
+]

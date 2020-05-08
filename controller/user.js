@@ -6,13 +6,14 @@ const {generateToken} = require('../helpers/jwt.js')
 
 class UserController {
     static register(req, res){
-    const {email, password} = req.body
+    const {email, password, organisation} = req.body
 
-    User.create({ email, password })
+    User.create({ email, password, organisation })
         .then(user => {
             res.status(201).json({
                 id : user.id,
                 email : user.email,
+                organisation : user.organisation
             })
         })
         .catch(err => {
@@ -21,7 +22,7 @@ class UserController {
             })
         })
     }
-    static logIn(req, res) {
+    static logIn(req, res, next) {
         const {email, password} = req.body
 
         User.findOne({
@@ -33,16 +34,18 @@ class UserController {
                     if(compare){
                         let token = generateToken({
                             id : result.id,
-                            email : result.email
+                            email : result.email,
+                            organisation : result.organisation
                         })
                         res.status(201).json({
-                            id : result.id, email : result.email, token
+                            id : result.id, email : result.email, token, organisation : result.organisation
                         })
-                    }else(
-                        res.status(400).json({
-                            msg : 'Email and Password not match'
-                        })
-                    )
+                    }else{
+                        throw {
+                            msg : 'email or password wrong',
+                            code : 401
+                        }
+                    }
                 }else{
                     res.status(400).json({
                         msg : 'Email and Password not match'
@@ -50,9 +53,7 @@ class UserController {
                 }
             })
             .catch(err => {
-                res.status(500).json({
-                    error : err.message
-                })
+                next(err)
             })
     }
 }

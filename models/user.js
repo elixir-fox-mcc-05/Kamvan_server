@@ -29,12 +29,18 @@ module.exports = (sequelize, DataTypes) => {
         }
       }
     },
-    password: DataTypes.STRING
+    password: DataTypes.STRING,
+    organisation: {
+      type : DataTypes.STRING,
+    }
   },{
     sequelize,
     hooks : {
       beforeCreate : (user) => {
         user.password = generatePassword(user.password)
+        if(user.organisation == ''){
+          user.organisation = "Hacktiv8"
+        }
       }
     }
   })
