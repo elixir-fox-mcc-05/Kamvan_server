@@ -3,7 +3,9 @@ let userRoutes = require('./user.js')
 let taskRoute = require('./task.js')
 
 router.get('/',(req,res)=>{
-    res.send('masuk home')
+    res.status(200).json({
+        msg : 'masuk home'
+    })
 })
 
 router.use(userRoutes)
