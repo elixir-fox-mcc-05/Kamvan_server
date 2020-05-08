@@ -1,0 +1,17 @@
+{
+  "development": {
+    "username": "postgres",
+    "password": "Rom@nist1",
+    "database": "db_kanban",
+    "host": "localhost",
+    "dialect": "postgres",
+    "operatorsAliases": false
+  },
+  "production": {
+    "username": "orawbhgbvligzn",
+    "password": "141843c5fd90a481e53d5242653193f83bf52ccf39aad9ecc63a8f3050ac951d",
+    "database": "da4ofpulm4cgbk",
+    "host": "ec2-34-195-169-25.compute-1.amazonaws.com",
+    "dialect": "postgres"
+  }
+}
