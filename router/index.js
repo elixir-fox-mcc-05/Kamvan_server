@@ -7,7 +7,7 @@ router.get('/',(req,res)=>{
 })
 
 router.use(userRoutes)
-router.use(taskRoute)
+router.use('/task',taskRoute)
 
 
 module.exports = router

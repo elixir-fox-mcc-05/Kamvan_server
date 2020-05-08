@@ -9,7 +9,17 @@ module.exports = (sequelize, DataTypes) => {
     description: DataTypes.STRING,
     point: DataTypes.INTEGER,
     assign_to: DataTypes.STRING,
-    status: DataTypes.STRING
+    status: {
+      type: DataTypes.STRING
+    },
+    user_id: {
+      allowNull: false,
+      type: DataTypes.INTEGER
+    },
+    user_org: {
+      allowNull: false,
+      type: DataTypes.STRING
+    },
   }, {
     sequelize,
     hooks : {

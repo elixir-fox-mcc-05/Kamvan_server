@@ -35,12 +35,26 @@ module.exports = (sequelize, DataTypes) => {
             msg : 'password length must morethan 8 and lessthan 30'
           }
         }
+      },
+      org: {
+        allowNull : {
+          args : false,
+          msg : 'organisation cannot be empty'
+        },
+        type : DataTypes.STRING,
       }
+
+
     } , {
       sequelize,
       hooks : {
         beforeCreate(user) {
           user.password = hashPass(user.password)
+          if(!user.org) {
+            user.org = 'Hacktiv8'
+          } else {
+
+          }
         }
       }
     })

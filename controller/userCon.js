@@ -18,7 +18,8 @@ class UserCon {
                 if (check) {
                     let obj = {
                         id : result.id,
-                        email : result.email
+                        email : result.email,
+                        org : result.org
                     }
                     let token = genToken(obj)
                     res.status(200).json({
@@ -44,7 +45,7 @@ class UserCon {
     }
 
     static register(req,res) {
-        let {email,password,confirm_password} = req.body
+        let {email,password,confirm_password,org} = req.body
 
         if(password!=confirm_password) {
             res.status(400).json({
@@ -53,7 +54,8 @@ class UserCon {
         } else {
             User.create({
                 email,
-                password
+                password,
+                org
             })
             .then(result=>{
                 res.status(201).json({
@@ -67,6 +69,24 @@ class UserCon {
                 })
             })
         }
+    }
+
+    static userRegOrgList(req,res) {
+        User.findAll({})
+        .then(result=>{
+            let orgList = []
+            result.forEach(element => {
+                orgList.push(element.org) 
+            });
+            res.status(200).json({
+                orgList
+            })
+        })
+        .catch(err=>{
+            res.status(500).json({
+                msg: 'internal server error'
+            })
+        })
     }
 }
 

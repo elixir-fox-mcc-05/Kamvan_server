@@ -2,22 +2,46 @@ let { Task } = require('../models')
 
 class TaskCon {
     static show(req,res) {
-        Task.findAll()
+        Task.findAll({
+            where : {
+                user_org : req.body.user_org
+            }
+        })
         .then(result=>{
-            res.send(result)
+            if(result) {
+                let task = []
+                result.forEach(element => {
+                    let obj = {
+                        id : element.id,
+                        title : element.title,
+                        description : element.description,
+                        point : element.point,
+                        status : element.status,
+                    }
+                    task.push(obj)
+                });
+                res.status(200).json({
+                    task
+                })
+            } else {
+                res.status(200).json({
+                    result : []
+                })
+            }
         })
         .catch(err=>{
             res.send(err)
         })
     }
     static add(req,res) {
-        let {title,description,point,assign_to} = req.body
-
+        let {title,description,point,assign_to,user_id,user_org} = req.body
         Task.create({
             title,
             description,
             point,
-            assign_to
+            assign_to,
+            user_id,
+            user_org
         })
         .then(result=>{
             res.status(201).json({
@@ -34,11 +58,10 @@ class TaskCon {
 
     }
     static edit(req,res) {
-        // res.send({
-        //     id : req.params.id,
-        //     status : req.body.status
-        // })
         Task.update({
+            title : req.body.title,
+            description : req.body.description,
+            point : req.body.point,
             status : req.body.status
         }, {
             where : {
