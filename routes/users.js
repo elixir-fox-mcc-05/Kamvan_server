@@ -5,7 +5,7 @@ const { authentication } = require('../middlewares/authentication')
 
 router.get('/', authentication, usersController.getAll)
 router.post('/register', usersController.register)
-// router.get('/google-login', usersController.googleLogin)
+router.get('/google-login', usersController.googleLogin)
 router.post('/login', usersController.login)
 
 module.exports = router
