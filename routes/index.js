@@ -4,7 +4,8 @@ const user = require('./user')
 const task = require('./task')
 
 // connect to user and task
-router.use(user)
-router.use(task)
+router.get('/', (req, res) => { res.json({ msg: 'routes here' }) } )
+router.use('/', user)
+router.use('/tasks', task)
 
 module.exports = router
