@@ -1,5 +1,5 @@
 'use strict';
-const { encrypt } = require('../helpers/bcrypt')
+// const { encrypt } = require('../helpers/bcrypt')
 
 module.exports = (sequelize, DataTypes) => {
 

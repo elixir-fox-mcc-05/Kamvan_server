@@ -1,12 +1,13 @@
 const {User} = require('../models')
-const {encrypt,compare} = require('../helpers/bcrypt')
+// const {encrypt,compare} = require('../helpers/bcrypt')
 const {generateToken} = require('../helpers/jwt')
+const googleVerification = require('../helpers/googleOAuth')
 
 class UserController{
 
     static login(req,res,next){
         let {email,password} = req.body
-        console.log('masuk')
+        // console.log('masuk')
         User
             .findOne({where : {email}})
             .then(data => {
@@ -60,9 +61,10 @@ class UserController{
             let newUser = false;
             let first_name = null;
             let last_name = null
-        
+            console.log(google_token)
             googleVerification(google_token)
               .then(payload => {
+                console.log(payload)
                 email = payload.email;
                 first_name = payload.given_name;
                 last_name = payload.family_name;
@@ -76,10 +78,12 @@ class UserController{
                   })
               })
               .then(user => {
+                // console.log('errr')
                 if (user) {
                   return user;
                 } else {
                   newUser = true;
+                  
                   return User
                     .create({
                         first_name,
@@ -92,16 +96,20 @@ class UserController{
               .then(user => {
                 let code = newUser ? 201 : 200;
         
-                const token = generateToken({
-                  id: user.id,
-                  email: user.email
-                });
+                // const token = generateToken({
+                //   id: user.id,
+                //   email: user.email
+                // });
         
                 res.status(code).json({
-                  token
+                  token :  generateToken({data : {
+                                                id: user.id,
+                                                email: user.email
+                                              }})
                 });
               })
               .catch(err => {
+                // console.log('errrr')
                 next(err);
               })
      }
