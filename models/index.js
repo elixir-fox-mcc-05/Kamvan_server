@@ -10,6 +10,8 @@ const db = {};
 
 let sequelize;
 if (process.env.DATABASE_URL) {
+  console.log('masukkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk');
+  console.log(process.env.DATABASE_URL,'------------------------');
   sequelize = new Sequelize(process.env[config.use_env_variable], {dialect: "postgres",protocol: "postgres"});
 
 } else {
