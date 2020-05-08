@@ -10,7 +10,7 @@ function authorization(req, res, next) {
                 } else {
                     next({
                         name: 'Unauthorized',
-                        errors: [{ message: `User tidak memilik hak akses untuk edit/delete`}]
+                        errors: [{ message: `User tidak memilik hak akses`}]
                     })
                 }
             } else {
