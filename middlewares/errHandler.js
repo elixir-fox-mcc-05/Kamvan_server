@@ -8,14 +8,14 @@ module.exports = (err, req, res, next) => {
 	}
 
 	if (err.name === 'SequelizeValidationError') {
-		let errors = err.errors.map((el) => ({
+		let message = err.errors.map((el) => ({
 			message: el.message
 		}));
 
 		res.status(400).json({
 			code: 400,
 			type: 'BAD REQUEST',
-			errors
+			message
 		});
 	}
 
@@ -23,7 +23,7 @@ module.exports = (err, req, res, next) => {
 		res.status(401).json({
 			code: 401,
 			type: 'UNAUTHORIZED',
-			message: 'Please login first!'
+			message: 'Please signin first!'
 		});
 	}
 
