@@ -7,29 +7,30 @@ function authentication(req,res,next){
     const decodedUser = verifyToken(req.headers.access_token)
     User.findOne({
         where:{
-            id:decodedUser.id
+          id:decodedUser.id
         }
     })
       .then(result=>{
         if(result){
+            req.currentUserOrganization = result.organization
             req.currentUserId = result.id
             return next()
         } else {
-            res.status(400).json({
-                message:"User not found",
-                error: "User not found"
+            next({
+              message:"User not found",
+              error: "User not found. Please register first"
             })
         }
       })
       .catch(error =>{
-        res.status(401).json({
-            name:"User Not Authorized", 
-            errors: "User Not Authorized"
+        next({
+            message:"Internal Server Error", 
+            error: error
         })
       })
   }
-  catch(err){
-    res.status(500).json({
+  catch(error){
+    next({
         message: "Internal Server Error",
         error
     })

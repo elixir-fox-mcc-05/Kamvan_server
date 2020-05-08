@@ -1,12 +1,17 @@
-const {Task} = require("../models/index.js")
+const {Task,User} = require("../models/index.js")
 
 class taskController{
- static getAllTasks(){
-    Task.findAll()
+ static getAllTasks(req,res,next){
+    Task.findAll({ 
+        include: [ User ],
+        where:{
+            organization: req.currentUserOrganization
+        }
+    })
     .then(result =>{
         res.status(200).json({
             message:"All tasks successfully read",
-            result
+            allTasks:result
         })
     })
     .catch(error =>{
@@ -17,7 +22,7 @@ class taskController{
         })
     })
  }
- static getOneTask(){
+ static getOneTask(req,res,next){
     let selectedId = req.params.id
     Task.findByPk(selectedId)
     .then(result => {
@@ -39,13 +44,14 @@ class taskController{
     })
  } 
  static addTask(req,res,next){
-    let { title, description, category, due_date } = req.body
+    let { title, description, due_date } = req.body
     let newTask = {
         title,
         description,
-        category,
+        category: 'backlog', //as default
         due_date,
-        UserId = req.currentUserId
+        organization : req.currentUserOrganization,
+        UserId : req.currentUserId
     }
     Task.create(newTask)
      .then(result =>{
@@ -76,7 +82,8 @@ class taskController{
     Task.update(updatedTask,{
         where:{
             id: selectedId
-        }
+        },
+        returning:true
     })
       .then(result =>{
         res.status(200).json({

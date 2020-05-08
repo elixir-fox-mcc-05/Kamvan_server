@@ -4,6 +4,6 @@ const userRoutes = require("../routes/userRoutes.js")
 const taskRoutes = require("../routes/taskRoutes.js")
 
 router.use('/', userRoutes)
-router.use('/task', taskRoutes)
+router.use('/tasks', taskRoutes)
 
 module.exports = router

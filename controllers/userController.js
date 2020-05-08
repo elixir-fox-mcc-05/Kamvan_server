@@ -1,11 +1,13 @@
 const {User} = require("../models/index.js")
-const {createToken} = require("../helpers/bcrypt.js")
+const {createToken} = require("../helpers/jwt.js")
+const {comparePassword} = require("../helpers/bcrypt.js")
 
 class userController {
     static register(req,res,next){
         let newUser = {
             email: req.body.email,
-            password: req.body.password
+            password: req.body.password,
+            organization: req.body.organization
         }
         User.create(newUser)
           .then(result =>{

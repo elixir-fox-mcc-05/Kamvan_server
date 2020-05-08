@@ -2,7 +2,6 @@
 
 const { encryptPassword } = require("../helpers/bcrypt.js")
 
-
 module.exports = (sequelize, DataTypes) => {
 
   class User extends sequelize.Sequelize.Model {}

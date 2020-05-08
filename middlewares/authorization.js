@@ -12,23 +12,22 @@ function authorization(req,res,next){
             if(result.UserId === req.currentUserId){
                 return next()
             } else{
-                res.status(401).json({
-                    name:"Unauthorized", 
-                    error: [{message: "User unauthenticated"}]
+                return next({
+                    message:"Unauthorized request", 
+                    errors: [{message: "User unauthorized to make this request"}]
                 })
             }
         } else {
             return next({
-                name:"User Not Found", 
-                errors: [{message: "User Not Found"}]
+                message:"BadRequest", 
+                errors: [{message: "Invalid request"}]
             })
         }
     })
-    .catch(error => {
-        console.log(error)
-        res.status(500).json({
+    .catch(err => {
+        next({
             message:"Internal Server Error",
-            error
+            error:err
         })
     })
 }

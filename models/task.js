@@ -66,18 +66,18 @@ module.exports = (sequelize, DataTypes) => {
     },
     UserId:{
       type: DataTypes.INTEGER
+    },
+    organization:{
+      type:DataTypes.STRING
     }
   }, {
     // Other model options go here
     sequelize, // We need to pass the connection instance
     modelName: 'Task' // We need to choose the model name
   });
-
-
-
-
   Task.associate = function(models) {
     // associations can be defined here
+    Task.belongsTo(models.User)
   };
   return Task;
 };
