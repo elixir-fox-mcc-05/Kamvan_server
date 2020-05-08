@@ -25,8 +25,7 @@ class TasksController {
     }
 
     static createTask (req, res, next) {
-        let { title, description, category, priority, deadline, AssigneeId } = req.body
-        let AssignorId = req.currentUserId
+        let { title, description, category, priority, deadline, AssigneeId, AssignorId } = req.body
         Task.create({
             title,
             description,
