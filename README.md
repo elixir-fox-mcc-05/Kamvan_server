@@ -545,7 +545,9 @@
     ```json
     {
     "id": 1,
-    "email": "dadaduy@mail.com"
+    "name": "Duwey McMeow",
+    "email": "dadaduy@mail.com",
+    "organization": "hacktiv8"
     }
     ```
  
