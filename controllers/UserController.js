@@ -1,6 +1,7 @@
 const { User } = require('../models');
 const { compare } = require('../helpers/bycrypt.js');
 const { generateToken } = require('../helpers/jsonwebtoken.js');
+const googleVerification = require('../helpers/googleOauthApi.js');
 
 class UserController {
     static register(req, res, next) {
@@ -49,6 +50,43 @@ class UserController {
                         errors: { message: err.message }
                     })
                 })
+    }
+
+    static googleLogin(req, res, next) {
+        let email = null;
+        let google_token = req.headers.google_token;
+        let newUser = false;
+        let name = null;
+        googleVerification(google_token)
+            .then(payload => {
+                email = payload.email;
+                name = payload.name;
+                return User
+                    .findOne({ where: { email } })
+            })
+            .then(user => {
+                if (user) {
+                    return user;
+                } else {
+                    newUser = true;
+                    return User
+                        .create({
+                            name,
+                            email,
+                            password: process.env.DEFAULT_GOOGLE_PASSWORD
+                        })
+                }
+            })
+            .then(user => {
+                let code = newUser ? 201 : 200;
+                const token = generateToken({ id: user.id, name: user.name, email: user.email })
+                res.status(code).json({
+                    token
+                })
+            })
+            .catch(err => {
+                next(err)
+            })
     }
 }
 
