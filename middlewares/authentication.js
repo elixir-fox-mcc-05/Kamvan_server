@@ -14,6 +14,7 @@ module.exports = {
                 .then(user => {
                     if(user) {
                         req.userId = id;
+                        req.organization = user.organization;
                         next();
                     } else {
                         throw {

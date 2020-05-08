@@ -1,10 +1,10 @@
-const { task } = require('../models');
+const { Task } = require('../models');
 
 module.exports = {
     authorizeUser: (req, res, next) => {
         const { id } = req.params;
 
-        task
+        Task
             .findByPk(id)
             .then(task => {
                 if(task) {

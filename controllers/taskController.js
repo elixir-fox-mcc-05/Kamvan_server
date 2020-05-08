@@ -2,14 +2,13 @@ const { User, Task } = require('../models');
 
 class TaskController {
     static addNewTask(req, res, next) {
-        const { title, description, category, due_date } =req.body;
+        const { title, description, due_date } = req.body;
         const UserId = req.userId
 
         Task
             .create({
                 title,
                 description,
-                category,
                 due_date: new Date(due_date),
                 UserId
             })
@@ -24,12 +23,18 @@ class TaskController {
     }
 
     static getAllTask(req, res, next) {
-        const UserId = req.userId;
+        const organization = req.organization;
 
         Task
             .findAll({
-                where: {
-                    UserId
+                include: {
+                    model: User,
+                    where: {
+                        organization
+                    },
+                    attributes: {
+                        exclude:['password', 'createdAt', 'updatedAt']
+                    }
                 }
             })
             .then(tasks =>{
@@ -68,8 +73,31 @@ class TaskController {
             })
     }
 
+    static changeCategory(req, res, next) {
+        const { id } = req.params;
+        const { category } = req.body;
+
+        Task
+            .update({
+                category
+            },{
+                where: {
+                    id
+                },
+                returning: true
+            })
+            .then(task => {
+                res.status(200).json({
+                    task
+                })
+            })
+            .catch(err => {
+                next(err);
+            })
+    }
+
     static deleteTask(req, res, next) {
-        const { id } =req.params;
+        const { id } = req.params;
 
         Task
             .destroy({

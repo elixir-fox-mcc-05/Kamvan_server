@@ -22,6 +22,7 @@ module.exports = (sequelize, DataTypes) => {
     category: {
       type: DataTypes.STRING,
       allowNull: false,
+      defaultValue: 'backlog',
       validate: {
         notEmpty: {
           msg: 'Task category can\'t be empty'

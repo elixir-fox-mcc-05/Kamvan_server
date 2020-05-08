@@ -7,7 +7,7 @@ module.exports = {
         } else if (Array.isArray(err.errors)) {
             let errors = [];
             err.errors.forEach(error => {
-                errors.push(error);
+                errors.push(error.message);
             })
             res.status(400).json({
                 error: errors
