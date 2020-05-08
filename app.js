@@ -3,7 +3,7 @@ if(process.env.NODE_ENV == 'development') {
 }
 let express = require ('express')
 let app = express()
-let port = 3000
+let port = process.env.PORT || 3000
 let router = require('./routers/index')
 let cors = require('cors')
 
