@@ -1,5 +1,5 @@
 let { OAuth2Client } = require('google-auth-library');
-let {User, Task} = require('../models/index')
+let User = require('../models/index')
 let {compare} = require('../helpers/bycrypt')
 let {jwtToken} = require('../helpers/jwt')
 class UserController {
