@@ -30,6 +30,8 @@ HTTP Method : POST
 
 Request:
 
+first_name:[string]
+last_name:[string]
 email:[string]
 password:[string]
 
@@ -93,6 +95,45 @@ Success :
         UserId : 12}
 
 error : 
+
+500 : {err : 'internal server error'}
+
+------------------------------------------------------------------------------------------------------------
+
+URL 
+
+'/tasks/add'
+
+HTTP Method : POST
+
+Request:
+
+Headers : token=[string]
+
+Body : 
+title=[string]
+points=[integer]
+description=[string]
+category=[string]
+organization=[string]
+
+response 
+
+Success :
+
+200 :{
+    "id": 13,
+    "title": "shotgun",
+    "points": 100,
+    "description": "asdasdasdasdasd",
+    "category": "done",
+    "organization": "hacktiv8",
+    "UserId": 4
+}
+
+error : 
+
+400 : {error : 'unable to}
 
 500 : {err : 'internal server error'}
 

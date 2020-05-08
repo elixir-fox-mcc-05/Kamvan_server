@@ -7,7 +7,7 @@ class UserController{
 
     static login(req,res,next){
         let {email,password} = req.body
-        console.log(email)
+        // console.log(email)
         User
             .findOne({where : {email}})
             .then(data => {
@@ -25,7 +25,7 @@ class UserController{
             })
             .catch(err => {
                 res.status(400).json({
-                  error : 'unable to login'
+                  error : err
                 })
             })
     }
@@ -61,10 +61,10 @@ class UserController{
             let newUser = false;
             let first_name = null;
             let last_name = null
-            console.log(google_token)
+            // console.log(google_token)
             googleVerification(google_token)
               .then(payload => {
-                console.log(payload)
+                // console.log(payload)
                 email = payload.email;
                 first_name = payload.given_name;
                 last_name = payload.family_name;
