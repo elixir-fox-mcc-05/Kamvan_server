@@ -1,6 +1,7 @@
 const {User} = require("../models/index.js")
 const {createToken} = require("../helpers/jwt.js")
 const {comparePassword} = require("../helpers/bcrypt.js")
+const {OAuth2Client} = require('google-auth-library');
 
 class userController {
     static register(req,res,next){
@@ -72,6 +73,61 @@ class userController {
                 message:"Internal Server Error",
                 error
             })
+        })
+    }
+    static googleSign(req,res,next){
+        const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
+        let email = ""
+        client.verifyIdToken({
+            idToken: req.body.id_token,
+            audience: process.env.GOOGLE_CLIENT_ID
+        })
+        .then(ticket =>{
+            email = ticket.getPayload().email
+            return User.findOne({
+                where:{
+                    email: email
+                }
+            })
+        })
+        .then(data =>{
+            if(data){
+                let user = {
+                    id: data.id,
+                    email: data.email,
+                }
+                let token = createToken(user)
+                res.status(200).json({
+                    id: data.id,
+                    email: data.email,
+                    access_token:token
+                })
+            } else {
+                //jika tidak ada, daftarkan
+                return User.create({
+                    email,
+                    password: process.env.GOOGLE_USER_PASSWORD
+                })
+            }
+        })
+        .then(data => {
+            //Setelah didaftarkan, kita sign in user baru ini dengan buatkan token di sini
+
+            let user = {
+                id: data.id,
+                email: data.email,
+                password: data.password
+            }
+            let token = createToken(user)
+            res.status(201).json({
+                id: data.id,
+                email: data.email,
+                access_token: token
+            })
+            // setelah ini, jangan lupa buat fungsi log out di main.js client-side
+        })
+        .catch(error =>{
+            console.log(error)
         })
     }
 }
