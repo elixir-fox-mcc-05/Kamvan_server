@@ -2,7 +2,7 @@
 const {User} = require('../models');
 const {compare} = require('../helpers/bcrypt');
 const {generateToken} = require('../helpers/jwt');
-const {verificationToken} = require('../helpers/googleOauthApi');
+const verificationToken = require('../helpers/googleOauthApi');
 
 class UserController {
     static register(req, res, next){
@@ -82,6 +82,7 @@ class UserController {
         verificationToken(google_token)
             .then(payload => {
                 email = payload.email;
+                console.log(email);
                 return User.findOne({
                     where : {
                         email
