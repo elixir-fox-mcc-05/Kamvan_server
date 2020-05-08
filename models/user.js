@@ -1,4 +1,6 @@
 'use strict';
+const {generatePassword} = require('../helpers/bcrypt')
+
 module.exports = (sequelize, DataTypes) => {
   const Model = sequelize.Sequelize.Model
 
@@ -17,13 +19,21 @@ module.exports = (sequelize, DataTypes) => {
         notEmpty: true,
         len: [6,30]
       }
+    },
+    organization: {
+      type: DataTypes.STRING
     }
   }, {
+    hooks: {
+      beforeCreate: (user) => {
+        user.password = generatePassword(user.password)
+      }
+    },
     sequelize,
     modelName: 'User'
   });
   User.associate = function(models) {
-    // associations can be defined here
+    User.hasMany(models.Task)
   };
   return User;
 };

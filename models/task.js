@@ -23,13 +23,15 @@ module.exports = (sequelize, DataTypes) => {
       validate: {
         notEmpty: true
       }
-    }
+    },
+    UserId: DataTypes.INTEGER,
+    category: DataTypes.STRING
   }, {
     sequelize,
     modelName: 'Task'
   });
   Task.associate = function(models) {
-    // associations can be defined here
+    Task.belongsTo(models.User)
   };
   return Task;
 };
