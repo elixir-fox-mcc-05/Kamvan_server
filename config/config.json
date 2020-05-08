@@ -14,10 +14,10 @@
     "dialect": "postgres"
   },
   "production": {
-    "username": "postgres",
-    "password": "postgres",
-    "database": "Kamvan_Server",
-    "host": "localhost",
+    "username": "xlaitzaaswmtur",
+    "password": "57a6870648084378bfbfe2e340289e8a2f9ca7ec402eab91ae9f17608a54c53c",
+    "database": "dqujiobauj8jl",
+    "host": "ec2-52-201-55-4.compute-1.amazonaws.com",
     "dialect": "postgres"
   }
 }
