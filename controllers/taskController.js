@@ -1,4 +1,4 @@
-const { Task } = require('../models')
+const { Task,User } = require('../models')
 
 class TaskController {
 
@@ -31,7 +31,7 @@ class TaskController {
     static list(req, res, next) {
 
         Task
-            .findAll({where: {organization : req.SelectOrganization}})
+            .findAll({where: {organization : req.SelectOrganization},include : User})
             .then(data => {
                 res.status(200).json({
                     data : data
@@ -46,14 +46,15 @@ class TaskController {
     static select(req, res) {
 
         Task
-            .findByPk(req.params.id)
+            .findByPk(req.params.id,{include : User})
             .then(data => {
                 res.status(200).json({
                     id: data.id,
                     title: data.title,
                     points: data.points,
                     description: data.description,
-                    category : data.category
+                    category : data.category,
+                    User : data.User
                 })
             })
             .catch(err => {
@@ -94,10 +95,8 @@ class TaskController {
         let results;
         Task
             .findByPk(req.params.id)
-            .then(data1 => {
-                
+            .then(data1 => { 
                 results = Object.assign(data1)
-                
                 return Task.destroy({where : {id : req.params.id},returning : true})
             })
             .then(data => {

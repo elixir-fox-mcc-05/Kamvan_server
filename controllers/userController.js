@@ -6,7 +6,7 @@ class UserController{
 
     static login(req,res,next){
         let {email,password} = req.body
-
+        console.log('masuk')
         User
             .findOne({where : {email}})
             .then(data => {
@@ -23,7 +23,9 @@ class UserController{
                 }
             })
             .catch(err => {
-                next(err)
+                res.status(400).json({
+                  error : 'unable to login'
+                })
             })
     }
 
