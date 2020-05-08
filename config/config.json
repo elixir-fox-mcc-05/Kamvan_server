@@ -5,5 +5,19 @@
     "database": "Kamvan_Server",
     "host": "localhost",
     "dialect": "postgres"
+  },
+  "test": {
+    "username": "postgres",
+    "password": "postgres",
+    "database": "Kamvan_Server",
+    "host": "localhost",
+    "dialect": "postgres"
+  },
+  "production": {
+    "username": "postgres",
+    "password": "postgres",
+    "database": "Kamvan_Server",
+    "host": "localhost",
+    "dialect": "postgres"
   }
 }
