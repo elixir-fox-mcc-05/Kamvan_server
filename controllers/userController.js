@@ -14,7 +14,7 @@ class UserController{
                 if(data) {
                     if(password == data.password){
                         res.status(200).json({
-                            token : generateToken(data)
+                            token : generateToken({data})
                         })
                     }
                 }else {
