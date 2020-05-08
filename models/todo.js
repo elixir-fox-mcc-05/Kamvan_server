@@ -14,10 +14,16 @@ module.exports = (sequelize, DataTypes) => {
       defaultValue : `backlog`
     },
     point: {
-      type : DataTypes.INTEGER
+      type : DataTypes.INTEGER,
+      validate : {
+        isInt : {
+          msg : `Point must be an integer`
+        }
+      }
     },
     UserId : DataTypes.INTEGER,
-    assignedTo : DataTypes.STRING
+    assignedTo : DataTypes.STRING,
+    organization : DataTypes.STRING
   },
   {
     sequelize,

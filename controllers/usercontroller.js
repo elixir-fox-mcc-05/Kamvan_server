@@ -11,10 +11,11 @@ require('dotenv').config()
 class UserController {
 
     static create ( req, res) {
-        const { email, password } = req.body
+        const { email, password, organization } = req.body
         let newUser = {
             email,
-            password
+            password,
+            organization
         }
         
         User.create(newUser)

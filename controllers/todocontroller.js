@@ -7,7 +7,7 @@ class TodoController {
 
     static create( req, res) {
         const { title, description, status, point, assignedTo } = req.body
-        let newTodo = { title, description, status, point, assignedTo , UserId : req.UserId }
+        let newTodo = { title, description, status, point, assignedTo , UserId : req.UserId, organization : req.organization }
         Todo.create(newTodo)
             .then (result => {
                 res.status(201).json({
@@ -25,6 +25,25 @@ class TodoController {
         Todo.findAll({
             where : {
                 UserId : req.UserId
+            }
+        })
+        .then (result => {
+            res.status(200).json({
+                Todo : result
+            });
+        })
+        .catch ( err => {
+            res.status(500).json({
+                Error : err
+            });
+        })
+    }
+
+    static getTodosByStatus ( req, res) {
+        Todo.findAll({
+            where : {
+                status : req.params.status,
+                organization : req.organization
             }
         })
         .then (result => {
@@ -59,11 +78,10 @@ class TodoController {
     }
 
     static updateTodo ( req, res) {
-        const { title, description, status, point, assignedTo} = req.body
+        const { title, description, point, assignedTo} = req.body
         Todo.update({
             title,
             description,
-            status,
             point,
             assignedTo
         }, {
@@ -83,7 +101,7 @@ class TodoController {
         })
         .catch ( err => {
             res.status(501).json({
-                err
+                Error : err.message
             });
         })
     }
@@ -108,8 +126,13 @@ class TodoController {
     }
 
     static setStatus ( req, res) {
-        const { id, status } = req.params
+        const { id, status } = req.params;
+        const { title, description, point, assignedTo} = req.body
         Todo.update({
+            title,
+            description,
+            point,
+            assignedTo,
             status : status
         }, {
             where : {
@@ -129,8 +152,8 @@ class TodoController {
             }
         })
         .catch ( err => {
-            res.status(501).json({
-                err
+            res.status(500).json({
+                err : err.message
             });
         })
     }

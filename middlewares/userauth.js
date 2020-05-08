@@ -12,6 +12,7 @@ function authenticate( req, res, next) {
         .then(result => {
                 if(result){
                     req.UserId = UserId;
+                    req.organization = result.organization
                     next ();
                 } else {
                     res.status(400).json({

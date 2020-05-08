@@ -26,6 +26,10 @@ module.exports = (sequelize, DataTypes) => {
           msg : `password must be between 4 to 8 characters`
         }
       }
+    },
+    organization : {
+      type : DataTypes.STRING,
+      defaultValue: `Hacktiv8`
     }
   },
   {
