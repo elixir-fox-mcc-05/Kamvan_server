@@ -61,13 +61,15 @@ class UserController {
 			});
 	}
 
-	static googleLogin(req, res, next) {
+	static googleSignIn(req, res, next) {
 		let google_token = req.headers.google_token;
+		let name = null;
 		let email = null;
 		let newUser = null;
 
 		googleVerification(google_token)
 			.then((dataPayload) => {
+				name = dataPayload.given_name;
 				email = dataPayload.email;
 
 				let options = {
@@ -81,6 +83,7 @@ class UserController {
 				} else {
 					newUser = true;
 					return User.create({
+						name: name,
 						email: email,
 						password: process.env.DEFAULT_PASSWORD_GOOGLE_LOGIN
 					});
@@ -89,13 +92,14 @@ class UserController {
 			.then((user) => {
 				let code = newUser ? 201 : 200;
 
-				let token = generateToken({
+				let access_token = generateToken({
 					id: user.id,
-					email: user.email
+					email: user.email,
+					organization: user.organization
 				});
 
 				res.status(code).json({
-					token
+					access_token
 				});
 			})
 			.catch((err) => {

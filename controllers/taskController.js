@@ -17,7 +17,8 @@ class TaskController {
 						exclude: [ 'password', 'createdAt', 'updatedAt' ]
 					}
 				}
-			]
+			],
+			order: [["id","asc"]]
 		};
 
 		Task.findAll(options)
