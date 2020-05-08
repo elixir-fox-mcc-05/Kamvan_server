@@ -12,7 +12,6 @@ function authentication(req, res, next) {
             }
         })
         .catch(err => {
-            // throw user tidak ada
             next(err)
         })
 }

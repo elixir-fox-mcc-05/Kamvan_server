@@ -19,6 +19,10 @@ module.exports = (sequelize, DataTypes) => {
         notNull: true
       }
     },
+    organization: {
+      type: DataTypes.STRING,
+      defaultValue: 'Hacktiv8'
+    }
   }, 
   {
     sequelize,

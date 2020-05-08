@@ -8,4 +8,10 @@ function verify(token) {
     return jwt.verify(token, process.env.SECRET)
 }
 
-module.exports = { generate_token, verify }
+function decode_data(token) {
+    return new Promise((resolve, reject) => {
+        resolve(jwt.decode(token))
+    })
+}
+
+module.exports = { generate_token, verify, decode_data }

@@ -1,11 +1,12 @@
 {
   "name": "Kamvan_Server",
   "version": "1.0.0",
-  "description": "",
+  "description": "## REGISTER",
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "NODE_ENV=development nodemon app.js"
+    "dev": "NODE_ENV=development nodemon app.js",
+    "start": "node app.js"
   },
   "repository": {
     "type": "git",

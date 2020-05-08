@@ -13,9 +13,9 @@ router.use(authentication)
 router.post('/tasks', Controller.new_task)
 
 // authorization
-router.use(authorization)
 
-router.get('/tasks/:taskId', Controller.task_id)
-router.delete('/tasks/:taskId', Controller.delete_task)
+router.get('/tasks/:taskId', authorization, Controller.task_id)
+router.put('/tasks/:taskId', authorization, Controller.edit_task)
+router.delete('/tasks/:taskId', authorization, Controller.delete_task)
 
 module.exports = router
