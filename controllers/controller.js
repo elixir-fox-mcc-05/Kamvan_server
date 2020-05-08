@@ -28,7 +28,7 @@ class Controller {
                 if (valid){
                     res
                       .status(200)
-                      .json({ access_token, User: user })
+                      .json({ access_token, User: user }) // User digunakan untuk mengambil datanya saat sudah login
                 }
             })
             .catch(err => {
