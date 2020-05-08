@@ -6,6 +6,9 @@
     "host": "localhost",
     "dialect": "postgres"
   },
+  "test" : {
+
+  },
   "production": {
     "use_env_variable" : "DATABASE_URL"
   }
