@@ -14,6 +14,7 @@ class UserController {
             organization
         })
         .then(user => {
+            console.log(user)
             const { id, name, email, organization } = user
             res.status(201).json({
                 id,
