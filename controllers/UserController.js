@@ -20,6 +20,7 @@ class UserController {
               email: result.email
             });
             res.status(200).json({
+              UserId: result.id,
               token
             });
           } else {
@@ -90,6 +91,7 @@ class UserController {
         });
 
         res.status(code).json({
+          UserId: user.id,
           token
         });
       })
