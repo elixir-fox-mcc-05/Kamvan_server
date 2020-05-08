@@ -40,22 +40,27 @@ class TaskController {
   }
   static updateTask(req, res, next) {
     let { title, description, points, categoryId, assigned_to } = req.body;
-    let id = req.params.id;
-    Task.update(
-      {
+    let value;
+    if (!title && !description && !points && !assigned_to) {
+      value = {
+        CategoryId: categoryId
+      };
+    } else {
+      value = {
         title,
         description,
         points,
         assigned_to,
         CategoryId: categoryId
+      };
+    }
+    let id = req.params.id;
+    Task.update(value, {
+      where: {
+        id
       },
-      {
-        where: {
-          id
-        },
-        returning: true
-      }
-    )
+      returning: true
+    })
       .then(result => {
         console.log(result);
         if (result[0] > 0) {
