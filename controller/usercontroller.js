@@ -2,6 +2,7 @@
 const {User} = require('../models');
 const {compare} = require('../helpers/bcrypt');
 const {generateToken} = require('../helpers/jwt');
+const {verificationToken} = require('../helpers/googleOauthApi');
 
 class UserController {
     static register(req, res, next){
@@ -72,6 +73,49 @@ class UserController {
                 //     type : "Internal Server Error",
                 //     msg : "Something Went Wrong"
                 // });
+            });
+    }
+    static googleLogin(req, res, next){ 
+        let google_token = req.headers.google_token;
+        let email = null;
+        let newUser = false;
+        verificationToken(google_token)
+            .then(payload => {
+                email = payload.email;
+                return User.findOne({
+                    where : {
+                        email
+                    }
+                });
+            })
+            .then(user => {
+                if(user){
+                    return user;
+                } else {
+                    newUser = true;
+                    return User
+                        .create({
+                            email,
+                            password : process.env.Default_user_password
+                        });
+                }
+            })
+            .then(user => {
+                let code = newUser ? 202 : 201;
+                let token = generateToken({
+                    id : user.id,
+                    email : user.email
+                });
+                res.status(code).json({
+                    Token : token
+                });
+            })
+            .catch(err => {
+                return next({
+                    code : 500,
+                    msg : "Something Went Wrong",
+                    type : "Internal Server Error"
+                });
             });
     }
 }
