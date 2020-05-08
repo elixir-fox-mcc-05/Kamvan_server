@@ -5,5 +5,19 @@
     "database": "db_kanban_elixir_fox",
     "host": "127.0.0.1",
     "dialect": "postgres"
+  },
+  "test": {
+    "username": "postgres",
+    "password": "postgres",
+    "database": "db_kanban_elixir_fox",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  },
+  "production": {
+    "username": "gfwbpqbwfympfx",
+    "password": "e03a745e74e4b20c2d04a02e41d3f5ebe40f460a375a19b0a9af3a78291f2ce4",
+    "database": "d31d89silsjc94",
+    "host": "ec2-52-201-55-4.compute-1.amazonaws.com",
+    "dialect": "postgres"
   }
 }
