@@ -3,8 +3,10 @@ const userRouter = require('./users.js');
 const taskRouter = require('./tasks.js');
 const categoryRouter = require('./category.js');
 
-router.get('/', () => {
-  console.log("Kamvan Board");
+router.get('/', (req, res) => {
+  res.status(200).json({
+    message: 'Welcome to Kamvan Server'
+  });
 });
 router.use('/', userRouter);
 router.use('/tasks', taskRouter);

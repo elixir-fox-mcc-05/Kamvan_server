@@ -11,6 +11,7 @@ module.exports = (err, req, res, next) => {
       msg: `Please Login First!`
     });
   } else {
+    console.log(err);
     res.status(err.code || 500).json({
       error: err
     });
