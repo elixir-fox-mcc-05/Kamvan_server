@@ -23,6 +23,11 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false
       },
+      organization: {
+        type: Sequelize.STRING,
+        allowNull: true,
+        defaultValue: 'Hacktiv8'
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

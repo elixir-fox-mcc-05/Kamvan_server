@@ -44,11 +44,19 @@ module.exports = (sequelize, DataTypes) => {
         notNull: true,
         len: [6, 25]
       }
+    },
+    organization: {
+      type: DataTypes.STRING,
+      allowNull: true,
+      defaultValue: "Hacktiv8"
     }
   },  {
     hooks: {
       beforeCreate(user) {
         user.password = encrypt(user.password);
+        if (user.organization == '') {
+          user.organization = 'Hacktiv8'
+        }
       }
     },  sequelize, modelName: "User"});
 

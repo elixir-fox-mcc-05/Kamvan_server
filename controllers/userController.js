@@ -6,12 +6,13 @@ const {userToken} = require('../helpers/jwt.js')
 
 class UserController {
 
-    static register(req, res) {
-        let {username, email, password} = req.body;
+    static register(req, res, next) {
+        let {username, email, password, organization} = req.body;
         User.create({
             username,
             email,
-            password
+            password,
+            organization,
         })
             .then(data => {
                 res.status(201).json(data);
@@ -53,7 +54,7 @@ class UserController {
                 }
             })
             .catch(err => {
-                next(err);
+                next({err});
             })
     }
 }

@@ -7,7 +7,8 @@ function authentication(req, res, next) {
 
     try {
         let check = verifyToken(token);
-        let {id} = check;
+        let {id, password} = check;
+        console.log(password)
         User.findByPk(id)
         .then(result => {
             if(result) {

@@ -21,8 +21,22 @@ module.exports = (sequelize, DataTypes) => {
     description: {
       type: DataTypes.STRING,
     },
+    point: {
+      type: DataTypes.INTEGER,
+      defaultValue: 0,
+    },
     assignedTo: {
       type: DataTypes.STRING,
+    },
+    StatId: {
+      type: DataTypes.INTEGER,
+      defaultValue: 1,
+      references: {
+        model: "Stat",
+        key: "id"
+      },
+      onUpdate: "Cascade",
+      onDelete: "Cascade"
     },
     UserId: {
       type: DataTypes.INTEGER,
@@ -40,6 +54,7 @@ module.exports = (sequelize, DataTypes) => {
   Task.associate = function(models) {
     // associations can be defined here
     Task.belongsTo(models.User);
+    Task.belongsTo(models.Stat)
   };
   return Task;
 };

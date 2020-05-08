@@ -2,34 +2,18 @@
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('Tasks', {
+    return queryInterface.createTable('Stats', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      title: {
+      name: {
         type: Sequelize.STRING
       },
-      description: {
+      color: {
         type: Sequelize.STRING
-      },
-      point: {
-        type: Sequelize.INTEGER,
-        defaultValue: 0,
-      },
-      assignedTo: {
-        type: Sequelize.STRING,
-      },
-      UserId: {
-        type: Sequelize.INTEGER,
-        references: {
-          model: "Users",
-          key: "id"
-        },
-        onUpdate: "Cascade",
-        onDelete: "Cascade"
       },
       createdAt: {
         allowNull: false,
@@ -42,6 +26,6 @@ module.exports = {
     });
   },
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('Tasks');
+    return queryInterface.dropTable('Stats');
   }
 };
