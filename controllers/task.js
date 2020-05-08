@@ -140,6 +140,28 @@ class TaskController{
         })
     }
 
+    static updateCategory(req, res, next){
+        console.log('masuk update one')
+        const { id, category } = req.body
+        console.log(id, category)
+        return Task.update({ 
+            category: category 
+        }, { 
+            where: { 
+                id: id 
+            },
+            returning: true
+        })
+            .then(result => {
+                return res.status(200).json({
+                    task: result[1]
+                })
+            })
+            .catch(err => {
+                return next(err)
+            })
+    }
+
     static delete(req, res, next){
         Task.destroy({
             where: {
