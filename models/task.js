@@ -25,6 +25,9 @@ module.exports = (sequelize, DataTypes) => {
     hooks : {
       beforeCreate(task) {
         task.status = 'back-log'
+        if(!task.title) {
+          task.title = 'Untitle'
+        }
       }
     }
   })
