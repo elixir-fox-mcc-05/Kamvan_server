@@ -7,12 +7,15 @@ module.exports = {
         
         try {
             let decoded = verifyToken(token);
-            let { id } = decoded;
+            let { id, email, fullname, organization } = decoded;
             User
                 .findByPk(id)
                 .then(result => {
                     if(result) {
                         req.userId = id;
+                        req.userEmail = email;
+                        req.userFullname = fullname;
+                        req.userOrganization = organization;
                         next();
                     } else {
                         throw {

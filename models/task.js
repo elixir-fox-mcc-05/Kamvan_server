@@ -4,10 +4,16 @@ module.exports = (sequelize, DataTypes) => {
   class Task extends Model {}
   Task.init({
     title: {
-      type: DataTypes.STRING
+      type: DataTypes.STRING,
+      validate: {
+        notEmpty: {args: true, msg: 'Title can\'t be empty'}
+      }
     },
     description: {
-      type: DataTypes.STRING
+      type: DataTypes.STRING,
+      validate: {
+        notEmpty: {args: true, msg: 'Description can\'t be empty'}
+      }
     },
     point: {
       type: DataTypes.INTEGER
@@ -20,7 +26,7 @@ module.exports = (sequelize, DataTypes) => {
       validate: {
         checkCategory() {
           const list = ['backlog', 'todo', 'doing', 'done'];
-          if(!list.includes(this.status.toLowerCase())){
+          if(!list.includes(this.category)){
             throw new Error('Category must be : backlog, todo, doing, done')
           }
         }
@@ -38,7 +44,7 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     hooks: {
       beforeCreate(task) {
-        task.category = this.category.toLowerCase();
+        task.category = 'backlog';
       }
     },
     sequelize

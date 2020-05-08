@@ -5,9 +5,9 @@ const { authorizeUser } = require('../middlewares/authorization.js');
 
 router.use(authenticateUser)
 router.get('/', TaskController.showAll);
-router.get('/:id', TaskController.showById);
 router.post('/', TaskController.create);
 router.put('/:id', authorizeUser, TaskController.update);
+router.patch('/:id/category', authorizeUser, TaskController.changeCategory);
 router.delete('/:id', authorizeUser, TaskController.delete);
 
 module.exports = router

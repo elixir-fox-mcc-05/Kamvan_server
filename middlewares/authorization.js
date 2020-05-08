@@ -1,10 +1,10 @@
-const { Todo, UserProject } = require('../models');
+const { Task } = require('../models');
 
 module.exports = {
     authorizeUser: (req, res, next) => {
         const { id } = req.params;
 
-        Todo
+        Task
             .findByPk(id)
             .then(result => {
                 if(result) {
@@ -20,31 +20,6 @@ module.exports = {
                     throw {
                         message: `Data Not Found`,
                         code: 404
-                    }
-                }
-            })
-            .catch(err => {
-                next(err);
-            })
-    },
-    authorizeProjectMember: (req, res, next) => {
-        const UserId = req.userId;
-        const ProjectId = req.params.id ? req.params.id : req.params.project_id;
-
-        UserProject
-            .findOne({
-                where: {
-                    UserId,
-                    ProjectId
-                }
-            })
-            .then(result => {
-                if(result) {
-                    next();
-                } else {
-                    throw {
-                        message: "Unauthorize user",
-                        code: 401
                     }
                 }
             })

@@ -36,10 +36,13 @@ class UserController {
                     if(compare) {
                         let accessToken = generateToken({
                             id: result.id,
-                            email: result.email
+                            email: result.email,
+                            fullname: result.fullname,
+                            organization: result.organization
                         });
                         res.status(200).json({
-                            accessToken
+                            id: result.id,
+                            access_token: accessToken
                         })
                     } else {
                         throw {
