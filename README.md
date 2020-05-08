@@ -341,7 +341,7 @@ Show All Tasks
 
 ## UPDATE TASK
 
-Update a ToDo by Id and show new Updated ToDo if success
+Update a Task
 
 - ### URL
 
