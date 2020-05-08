@@ -1,5 +1,6 @@
 module.exports = (err, req, res, next) => {
     console.log(err)
+    res.send(err)
     if(err.name == 'SequelizeValidationError') {
         let newErr = []
         err.errors.forEach(el => {
@@ -11,10 +12,8 @@ module.exports = (err, req, res, next) => {
                 newErr.push('Please input password from 6-20 characters')
             } else if(el.message == 'Validation len on title failed') {
                 newErr.push('Please input title from 3-40 characters')
-            } else if(el.message == 'Validation isAfter on due_date failed') {
-                newErr.push('Please input due date which is greater than today')
-            } else if(el.message == 'Validation len on description failed') {
-                newErr.push('Please input description from 3-150 characters')
+            } else if(el.message == 'Validation isAfter on deadline failed') {
+                newErr.push('Please input deadline which is greater than today')
             }
         })
         res.status(401).json({

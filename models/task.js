@@ -40,7 +40,17 @@ module.exports = (sequelize, DataTypes) => {
     AssignorId: DataTypes.INTEGER,
     AssigneeId: DataTypes.INTEGER
   }, {
-    sequelize
+    sequelize,
+    hooks: {
+      beforeCreate: (task) => {
+        if(!task.priority || task.priority == '' || task.priority == ' ') {
+          task.priority = 'Normal'
+        }
+        if(!task.category || task.category == '' || task.category == ' ') {
+          task.category = 'Back-Log'
+        }
+      }
+    }
   })
   
   Task.associate = function(models) {
