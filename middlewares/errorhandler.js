@@ -11,7 +11,7 @@ module.exports = (err, req, res, next) => {
         res.status(400).json({ 
             code: 400,
             type: `Bad Request`,
-            errors: {message: err.message}
+            errors: { message: err.message }
         });
     } else if (err.name == 'JsonWebTokenError') {
         res.status(401).json({ 
