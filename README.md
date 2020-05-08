@@ -2,7 +2,7 @@
 
 ## API Documentation
 
- Documentation also can be seen at
+ Documentation also can be seen [here](https://documenter.getpostman.com/view/11047414/SzmfXGfq?version=latest)
 ----
 
 **Create New Task**
@@ -32,9 +32,9 @@
 
   | key | value | required |
   | :---: | :---: | :---: |
-  | title | <YOUR_TODO_TITLE> | true |
-  | description | <YOUR_TODO_DESCRIPTION> | false |
-  | due_date | <YOUR_TODO_DUE_DATE> | true |
+  | title | <YOUR_TASK_TITLE> | true |
+  | description | <YOUR_TASK_DESCRIPTION> | false |
+  | due_date | <YOUR_TASK_DUE_DATE> | true |
 
 * **Success Response:**
   
@@ -81,7 +81,7 @@
 ----
   **Show All Tasks**
 ----
-  Show all existing task on todo list that from same organization
+  Show all existing task on kanban board that came from same organization
 
 * **URL**
 
@@ -293,16 +293,21 @@
     **Content:** 
     ```json
     {
-    "Todo": {
-        "id": 1,
-        "title": "Learn Jquery",
-        "description": "Learn Jquery from book and youtube",
-        "status": false,
-        "due_date": "2020-05-01T00:00:00.000Z",
-        "UserId": null,
-        "createdAt": "2020-04-27T20:28:20.446Z",
-        "updatedAt": "2020-04-27T20:28:20.446Z"
-        }
+    "task": [
+        1,
+            [
+                {
+                    "id": 25,
+                    "title": "Design Login Form",
+                    "description": "design a fancy, futuristic login form",
+                    "category": "todo",
+                    "due_date": "2020-05-19T00:00:00.000Z",
+                    "createdAt": "2020-05-08T14:17:01.113Z",
+                    "updatedAt": "2020-05-08T14:41:44.677Z",
+                    "UserId": 1
+                }
+            ]
+        ]
     }
     ```
  
@@ -311,7 +316,7 @@
   * **Code:** 401 UNAUTHORIZED <br />
     **Content:** 
     ```json
-    { "error" : "unauthorized user" }
+    { "error" : "You do not have the authority to do this action" }
     ```
   
   OR
@@ -339,13 +344,13 @@
     ```
 
 ----
-  **Update Todo**
+  **Update Task**
 ----
-  Update existing task on todo list, selected by id
+  Update existing task on kanban board, selected by id
 
 * **URL**
 
-  /todos/:id
+  /tasks/:id
 
 * **Method:**
   
@@ -368,9 +373,9 @@
 
   | key | value | required |
   | :---: | :---: | :---: |
-  | title | <YOUR_TODO_TITLE> | true |
-  | description | <YOUR_TODO_DESCRIPTION> | false |
-  | due_date | <YOUR_TODO_DUE_DATE> | true |
+  | title | <YOUR_TASK_TITLE> | true |
+  | description | <YOUR_TASK_DESCRIPTION> | false |
+  | due_date | <YOUR_TASK_DUE_DATE> | true |
 
 * **Success Response:**
   
@@ -379,16 +384,21 @@
     **Content:** 
     ```json
     {
-    "Todo": {
-        "id": 1,
-        "title": "Learn Jquery",
-        "description": "Learn Jquery from youtube",
-        "status": false,
-        "due_date": "2020-05-01T00:00:00.000Z",
-        "UserId": null,
-        "createdAt": "2020-04-27T20:28:20.446Z",
-        "updatedAt": "2020-04-27T20:28:20.446Z"
-        }
+        "task": [
+            1,
+            [
+                {
+                    "id": 25,
+                    "title": "Design Login Form",
+                    "description": "design a fancy, futuristic and responsive login form",
+                    "category": "todo",
+                    "due_date": "2020-05-10T00:00:00.000Z",
+                    "createdAt": "2020-05-08T14:17:01.113Z",
+                    "updatedAt": "2020-05-08T14:52:38.249Z",
+                    "UserId": 1
+                }
+            ]
+        ]
     }
     ```
  
@@ -397,7 +407,7 @@
   * **Code:** 401 UNAUTHORIZED <br />
     **Content:** 
     ```json
-    { "error" : "unauthorized user" }
+    { "error" : "you do not have the authority to do this action" }
     ```
   
   OR
@@ -425,13 +435,13 @@
     ````
 
 ----
-  **Delete Todo**
+  **Delete Task**
 ----
-  Delete existing task on todo list, selected by id
+  Delete existing task on kanban board, selected by id
 
 * **URL**
 
-  /todos/:id
+  /tasks/:id
 
 * **Method:**
   
@@ -467,7 +477,7 @@
   * **Code:** 401 UNAUTHORIZED <br />
     **Content:** 
     ```json
-    { "error" : "unauthorized user" }
+    { "error" : "You do not have the authority to do this action" }
     ```
   
   OR
@@ -497,7 +507,7 @@
 ----
   **User Register**
 ----
-  New user registration to create an account in todo app
+  New user registration in kanban app
 
 * **URL**
 
@@ -532,8 +542,8 @@
     **Content:** 
     ```json
     {
-    "id": 5,
-    "email": "hueyguey@mail.com"
+    "id": 1,
+    "email": "dadaduy@mail.com"
     }
     ```
  
@@ -548,7 +558,7 @@
 ----
   **User Login**
 ----
-  Login to user account to access todo list (if user already register)
+  Login to user account to access kanban board (if user already register)
 
 * **URL**
 
@@ -606,4 +616,53 @@
 
         ```json
         { "error" : "wrong password" }
+        ```
+
+----
+  **User Login Google**
+----
+  Login to Kanban app via google account
+
+* **URL**
+
+  /users/google-login
+
+* **Method:**
+  
+  `POST`
+
+* **Request Headers**
+
+  | key | value | required |
+  | :---: | :---: | :---: |
+  | google_token | <YOUR_GOOGLE_TOKEN> | true |
+  
+* **URL Params**
+
+   none
+
+* **Data Params**
+
+  | key | value | required |
+  | :---: | :---: | :---: |
+  | email | <YOUR_EMAIL> | true |
+  | password | <YOUR_PASSWORD_HERE> | true |
+
+* **Success Response:**
+  
+  
+  * **Code:** 200 OK <br />
+    **Content:** 
+    ```json
+    {
+    "accessToken": "<YOUR_TOKEN_HERE>"
+    }
+    ```
+ 
+* **Error Response:**
+
+    * **Code:** 500 INTERNAL SERVER ERROR <br />
+        **Content:** 
+        ```json
+        { "error" : "internal server error" }
         ```
