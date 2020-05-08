@@ -9,5 +9,6 @@ taskUser.get('/', TaskCon.show)
 taskUser.post('/', TaskCon.add)
 taskUser.patch('/:id',authorization, TaskCon.edit)
 taskUser.delete('/:id',authorization, TaskCon.delete)
+taskUser.patch('/move/:id', TaskCon.edit)
 
 module.exports= taskUser

@@ -2,8 +2,6 @@ let { decodedToken } = require('../helpers/jwt.js')
 let { Task } = require('../models')
 
 function authorization (req,res,next) {
-    console.log('masuk authorization')
-    console.log(req.params.id)
     let token = req.headers.token
     let decToken = decodedToken(token)
     Task.findByPk(req.params.id)
