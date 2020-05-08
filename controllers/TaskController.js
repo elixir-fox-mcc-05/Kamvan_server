@@ -29,7 +29,6 @@ class TaskController {
             description,
             point,
             assignedto,
-            category: category.toLowerCase(),
             UserId
         }
         Task.create(task)
@@ -46,7 +45,8 @@ class TaskController {
             title,
             description,
             point,
-            assignedto
+            assignedto,
+            category: category.toLowerCase(),
         }
         const option = {
             where: {
