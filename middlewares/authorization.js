@@ -12,7 +12,7 @@ module.exports = {
                         next();
                     } else {
                         throw {
-                            msg: 'user unauthorized',
+                            msg: 'You do not have the authority to do this action',
                             code: 401
                         }
                     }
@@ -22,6 +22,9 @@ module.exports = {
                         code: 404
                     }
                 }
+            })
+            .catch(err => {
+                next(err);
             })
     }
 }

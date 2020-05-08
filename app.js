@@ -7,6 +7,8 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 const cors = require('cors');
 const router = require('./routers');
+const http = require('http');
+let server = http.createServer(app);
 const { errHandler } = require('./middlewares/errHandler.js');
 
 app.use(cors());
@@ -15,4 +17,4 @@ app.use(express.urlencoded({ extended: false }));
 app.use(router);
 app.use(errHandler);
 
-app.listen(PORT, () => console.log(`Organize yourself at PORT: ${PORT}`));
+server.listen(PORT, () => console.log(`Organize yourself at PORT: ${PORT}`));

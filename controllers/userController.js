@@ -72,7 +72,8 @@ class UserController {
         let email;
         let newUser = false;
         
-        const { google_token } = req.body;
+        const { google_token } = req.headers;
+        console.log(google_token);
 
         verifyIdToken(google_token)
             .then(payload => {

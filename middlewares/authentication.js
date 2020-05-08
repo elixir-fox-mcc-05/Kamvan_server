@@ -18,7 +18,7 @@ module.exports = {
                         next();
                     } else {
                         throw {
-                            msg: 'Unauthorized User',
+                            msg: 'You do not have the authority to do this action',
                             code: 401
                         }
                     }

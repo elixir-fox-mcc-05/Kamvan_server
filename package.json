@@ -24,7 +24,9 @@
     "google-auth-library": "^6.0.0",
     "jsonwebtoken": "^8.5.1",
     "pg": "^8.0.3",
-    "sequelize": "^5.21.7"
+    "sequelize": "^5.21.7",
+    "sequelize-cli": "^5.5.1",
+    "socket.io": "^2.3.0"
   },
   "devDependencies": {
     "dotenv": "^8.2.0"
