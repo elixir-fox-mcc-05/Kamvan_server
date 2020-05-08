@@ -10,13 +10,18 @@
 
 >List of endpoint you can use<br>
 
-| URL           | Method        |
-| ------------- |:-------------:|
-| /tasks        | GET           |
-| /tasks        | POST          |
-| /tasks/:id    | GET           |
-| /tasks/:id    | PUT           |
-| /tasks/:id    | DELETE        |
+| URL                    | Method        |
+| -----------------------|:-------------:|
+| /tasks                 | GET           |
+| /tasks                 | POST          |
+| /tasks/:id             | GET           |
+| /tasks/:id             | PUT           |
+| /tasks/:id             | DELETE        |
+| /tasks/:id/category    | Patch         |
+| /register              | Post          |
+| /login                 | Post          |
+| /google-login          | Post          |
+
 
 <br>
 
@@ -348,6 +353,129 @@
         ```javascript
         {
             "error": "Id 7 is not found"
+        }
+        ```
+
+
+<br><br>
+
+-----
+## /tasks/:id/category
+-----
+* method: PATCH
+* purpose: Update Task Category
+* request params: id <br>
+* request token in headers <br>
+     ```javascript
+                {
+                    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwiZW1haWwiOiJhbWlyQGdtYWlsLmNvbSIsImlhdCI6MTU4ODE4NjAxN30.buWR7ZObH7L0_OmSMZSrj6wwrOTIH3Lak7tTX_HCqLE"
+                }
+     ```
+* success response: <br>
+    * code: 200 <br>
+    * content: <br>
+        ```javascript
+        {
+            "msg": "task with id 3 successfully deleted"
+        }
+        ```
+* error response: <br>
+    * code: 500 <br>
+    * content: <br>
+        ```javascript
+        {
+            "error": "internal server error"
+        }
+        ```
+   
+    * code: 401 <br>
+    * content: <br>
+        ```javascript
+        {
+            "error": "Please login first"
+        }
+        ```
+    
+    * code: 404 <br>
+    * content: <br>
+        ```javascript
+        {
+            "error": "Id 7 is not found"
+        }
+        ```
+
+
+<br><br>
+
+-----
+## /register
+-----
+* method: POST
+* purpose: Register User
+* success response: <br>
+    * code: 201 <br>
+    * content: <br>
+        ```javascript
+        {
+            "msg": "task with id 3 successfully deleted"
+        }
+        ```
+* error response: <br>
+    * code: 500 <br>
+    * content: <br>
+        ```javascript
+        {
+            "error": "internal server error"
+        }
+        ```
+
+
+<br><br>
+-----
+## /login
+-----
+* method: POST
+* purpose: User Login
+* success response: <br>
+    * code: 200 <br>
+    * content: <br>
+
+        ```javascript
+        {
+            "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwiZW1haWwiOiJhbWlyQGdtYWlsLmNvbSIsImlhdCI6MTU4ODE4NjAxN30.buWR7ZObH7L0_OmSMZSrj6wwrOTIH3Lak7tTX_HCqLE"
+        }
+        ```
+* error response: <br>
+    * code: 500 <br>
+    * content: <br>
+        ```javascript
+        {
+            "error": "internal server error"
+        }
+        ```
+
+
+<br><br>
+-----
+## /google-login
+-----
+* method: POST
+* purpose: User Login with google account
+* success response: <br>
+    * code: 200 <br>
+    * content: <br>
+
+        ```javascript
+        {
+            "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwiZW1haWwiOiJhbWlyQGdtYWlsLmNvbSIsImlhdCI6MTU4ODE4NjAxN30.buWR7ZObH7L0_OmSMZSrj6wwrOTIH3Lak7tTX_HCqLE"
+        }
+        ```
+* error response: <br>
+    * code: 500 <br>
+    * content: <br>
+        ```javascript
+        {
+            "error": "internal server error"
         }
         ```
 

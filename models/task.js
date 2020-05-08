@@ -1,5 +1,6 @@
 "use strict";
 module.exports = (sequelize, DataTypes) => {
+
   const Model = sequelize.Sequelize.Model;
 
   class Task extends Model {}
@@ -60,6 +61,10 @@ module.exports = (sequelize, DataTypes) => {
           },
         },
       },
+      UserId: {
+        type: DataTypes.INTEGER
+      },
+      organization: DataTypes.STRING
     },
     {
       sequelize,

@@ -1,11 +1,11 @@
-const { Task } = require("../models");
+const { Task } = require('../models');
 
 class TaskController {
   static findAll(req, res, next) {
-    let UserId = req.currentUserId;
     Task.findAll({
+      OrderBy: 'id',
       where: {
-        UserId,
+        organization: 'Hacktiv8',
       },
     })
       .then((data) => {
@@ -39,7 +39,7 @@ class TaskController {
   }
 
   static create(req, res, next) {
-    let { title, description, category } = req.body;
+    let { title, description, category, organization } = req.body;
     let UserId = req.currentUserId;
 
     Task.create({
@@ -47,11 +47,12 @@ class TaskController {
       description,
       category,
       UserId,
+      organization,
     })
       .then((data) => {
         res.status(201).json({
           task: data,
-          msg: "success create task",
+          msg: 'success create task',
         });
       })
       .catch((err) => {
@@ -73,6 +74,27 @@ class TaskController {
     })
       .then((result) => {
         res.status(201).json({
+          msg: `task with id ${id} succesfully updated`,
+          task: result[1][0],
+        });
+      })
+      .catch((err) => {
+        next(err);
+      });
+  }
+
+  static updateCategory(req, res, next) {
+    let { id } = req.params;
+    let updatedCategory = {
+      category: req.body.category,
+    };
+
+    Task.update(updatedCategory, {
+      where: { id },
+      returning: true,
+    })
+      .then((result) => {
+        res.status(200).json({
           msg: `task with id ${id} succesfully updated`,
           task: result[1][0],
         });

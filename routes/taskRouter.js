@@ -10,5 +10,7 @@ router.post("/", TaskController.create);
 router.put("/:id", authorization, TaskController.update);
 router.get("/:id", authorization, TaskController.findOne);
 router.delete("/:id", authorization, TaskController.delete);
+router.patch("/:id/category", authorization, TaskController.updateCategory);
+
 
 module.exports = router;
