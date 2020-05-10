@@ -1,0 +1,15 @@
+{
+  "development": {
+    "username": "godzi",
+    "password": "satu1234",
+    "database": "kamvan",
+    "host": "localhost",
+    "dialect": "postgres"
+  },
+  "test" : {
+
+  },
+  "production": {
+    "use_env_variable" : "DATABASE_URL"
+  }
+}
