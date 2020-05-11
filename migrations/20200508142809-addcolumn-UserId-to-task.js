@@ -28,6 +28,6 @@ module.exports = {
       Example:
       return queryInterface.dropTable('users');
     */
-    return queryInterface.removeColumn('Task', 'UserId');
+    return queryInterface.removeColumn('Tasks', 'UserId');
   }
 };

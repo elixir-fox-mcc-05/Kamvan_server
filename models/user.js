@@ -50,18 +50,7 @@ module.exports = (sequelize, DataTypes) => {
       }
     },
     organization: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      validate: {
-        notNull: {
-          args: true,
-          msg: "Description is required"
-        },
-        notEmpty: {
-          args: true,
-          msg: "This field cannot be empty"
-        }
-      }
+      type: DataTypes.STRING
     }
   },
   {

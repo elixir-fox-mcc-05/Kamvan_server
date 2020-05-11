@@ -3,36 +3,47 @@
 const Model = require("../models/index.js");
 
 const Task = Model.Task;
+const User = Model.User;
 
 class ControllerTask{
     static showTask(req, res, next){
-        const UserId = req.currentUserId;
-        
+        let UserOrganization = req.currentUserOrganization;
+        let options = {
+            include: [
+                {
+                    model: User,
+					where: {
+                        organization: UserOrganization
+					},
+					attributes: {
+                        exclude: [ 'password', 'createdAt', 'updatedAt' ]
+					}
+				}
+			],
+			order: [["id","asc"]]
+		};
+		
         Task
-            .findAll({
-                where: {
-                    UserId
-                }
-            })
+            .findAll(options)
             .then(tasks => {
                 res.status(200).json({tasks});
             })
             .catch(err => {
                 return next({
                     name: "InternalServerError",
-                    errors: [{message: err}]
+                    errors: [{message: 'the function is not working'}]
                 });
             })
     }
     static addTask(req, res, next){
-        const {title, description, status} = req.body;
+        const {title, description, category} = req.body;
         const UserId = req.currentUserId
         
         Task
             .create({
                 title,
                 description,
-                status,
+                category,
                 UserId
             })
             .then(result => {
@@ -93,7 +104,7 @@ class ControllerTask{
         const updatedTask = {
             title: req.body.title,
             description: req.body.description,
-            status: req.body.status
+            category: req.body.category
         }
         Task
             .update(updatedTask,

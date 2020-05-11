@@ -18,7 +18,8 @@ class ControllerUser{
         .then(data => {
             res.status(201).json({
                 id: data.id,
-                email: data.email
+                email: data.email,
+                organization: data.organization
             })
         })
         .catch(err => {
@@ -40,7 +41,6 @@ class ControllerUser{
           if(result){
             let compare = checkPassword(password, result.password);
             
-            console.log(compare)
             if(compare){
                     let token = generateToken({
                         id: result.id,

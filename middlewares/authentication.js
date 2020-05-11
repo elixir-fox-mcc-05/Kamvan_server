@@ -9,9 +9,11 @@ function authentication(req, res, next){
     try{
         let decoded = verifyToken(token);
         let {id} = decoded
-        User.findByPk(id)
+        User
+            .findByPk(id)
             .then(result => {
                 if(result){
+                    req.currentUserOrganization = result.dataValues.organization
                     req.currentUserId = id
                     next()
                 }

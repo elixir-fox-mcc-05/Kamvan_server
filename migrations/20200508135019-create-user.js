@@ -17,7 +17,7 @@ module.exports = {
         type: Sequelize.STRING
       },
       organization: {
-        allowNull: false,
+        defaultValue: "hacktiv8",
         type: Sequelize.STRING
       },
       createdAt: {

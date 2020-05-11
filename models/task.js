@@ -34,10 +34,10 @@ module.exports = (sequelize, DataTypes) => {
         }
       }
     },
-    status: {
+    category: {
       type: DataTypes.STRING,
       allowNull: false,
-      defaultValue: false,
+      defaultValue: 'Back-Log',
       validate: {
         notNull: {
           args: true,
@@ -49,7 +49,7 @@ module.exports = (sequelize, DataTypes) => {
         },
         isIn: {
           args: [['Back-Log', 'To-Do', 'Doing', 'Done']],
-          msg: "This field is status arguments only (Back-Log, To-Do, Doing, Done)"
+          msg: "This field is category arguments only (Back-Log, To-Do, Doing, Done)"
         }
       }
     },
