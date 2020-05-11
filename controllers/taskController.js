@@ -4,6 +4,9 @@ class TaskController {
     static create(req, res, next) {
         const { title, description, category, due_date } = req.body;
         const UserId = req.currentUserId
+        
+        console.log("@create", title);
+        
 
         Task.create({
             title,
@@ -33,6 +36,9 @@ class TaskController {
     static update(req, res, next) {
         let { title, description, category, due_date } = req.body;
         let { id } = req.params;
+
+        console.log("@update", title, id, category);
+        
 
         Task.findByPk(id)
             .then(result => {
