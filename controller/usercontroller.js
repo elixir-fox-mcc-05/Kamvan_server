@@ -13,7 +13,7 @@ class UserController {
             organization,
         };
         if(password !== confirmPassword){
-            return res.status(400).json({
+            return next({
                 code : 400,
                 type : "Bad Request",
                 msg : "Password doesn't match"
@@ -29,12 +29,7 @@ class UserController {
                 });
             })
             .catch(err => {
-                res.status(500).json({
-                    code : 500,
-                    type : "Internal Server Error",
-                    msg : "Something Went Wrong",
-                    err: err
-                });
+                return next(err);
             });
     }
     static login(req, res, next) {
@@ -47,7 +42,13 @@ class UserController {
                 }
             })
             .then(user => {
-                if(compare(password, user.password)){
+                if(!user){
+                    return next({
+                        type : "Bad Request",
+                        code : 400,
+                        msg : "User Doesn't Exist"
+                    });
+                } else if(compare(password, user.password)){
                     const token = generateToken({
                         id : user.id,
                         email : user.email,
@@ -57,7 +58,7 @@ class UserController {
                         acces_token : token
                     });
                 } else {
-                    res.status(400).json({
+                    return next({
                         code : 400,
                         type : "Bad Request",
                         msg : "Password Doesn't Match"
@@ -65,14 +66,7 @@ class UserController {
                 }
             })
             .catch(err => {
-                res.status(500).json({
-                   error : err,
-                });
-                // res.status(500).json({
-                //     code: 500,
-                //     type : "Internal Server Error",
-                //     msg : "Something Went Wrong"
-                // });
+                return next(err);
             });
     }
     static googleLogin(req, res, next){ 
@@ -82,7 +76,6 @@ class UserController {
         verificationToken(google_token)
             .then(payload => {
                 email = payload.email;
-                console.log(email);
                 return User.findOne({
                     where : {
                         email
@@ -112,11 +105,7 @@ class UserController {
                 });
             })
             .catch(err => {
-                return next({
-                    code : 500,
-                    msg : "Something Went Wrong",
-                    type : "Internal Server Error"
-                });
+                return next(err);
             });
     }
 }

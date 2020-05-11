@@ -14,7 +14,7 @@ function Authentication(req, res, next){
                     req.currentUser = id;
                     next();
                 } else {
-                    return res.status(400).json({
+                    return next({
                         code :400,
                         type : "Bad Request",
                         msg : "User Not Found"
@@ -23,11 +23,7 @@ function Authentication(req, res, next){
             });
 
     } catch (err) {
-        return res.status(500).json({
-            code: 500,
-            type: "Internal Server Error",
-            msg : "Something Went Wrong"
-        });
+        return next(err);
     }
 }
 

@@ -7,11 +7,10 @@ function Authorization(req, res, next){
     Task
         .findByPk(id)
         .then(task => {
-            console.log(task);
-            if(task) {
+            if(task.UserId === UserId) {
                 next();
             } else {
-                return res.status(401).json({
+                return next({
                     code : 401,
                     type : "Unauthorized",
                     msg : "You are not allowed to do this"
@@ -19,11 +18,7 @@ function Authorization(req, res, next){
             }
         })
         .catch(err => {
-            res.status(500).json({
-                code : 500,
-                type : "Internal Server Error",
-                msg : "Something Went Wrong"
-            });
+            res.next(err);
         });
 }
 

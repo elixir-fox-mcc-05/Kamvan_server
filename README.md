@@ -30,7 +30,7 @@
                                 "point": 100,
                                 "assigned": "test7",
                                 "category": "backlogs",
-                                "UserId": null,
+                                "UserId": 1,
                                 "createdAt": "2020-05-06T12:58:23.841Z",
                                 "updatedAt": "2020-05-06T12:58:23.841Z"
                                 },
@@ -41,7 +41,7 @@
                                 "point": 100,
                                 "assigned": "test8",
                                 "category": "backlogs",
-                                "UserId": null,
+                                "UserId": 1,
                                 "createdAt": "2020-05-06T12:58:23.841Z",
                                 "updatedAt": "2020-05-06T12:58:23.841Z"
                                 }
@@ -89,7 +89,7 @@
         ```
 *    Succes Response
         ```
-        Code : 202       
+        Code : 201       
         Content : {
                     "Task": {
                                 "id": 8,
@@ -98,7 +98,7 @@
                                 "point": 100,
                                 "assigned": "test8",
                                 "category": "backlogs",
-                                "UserId": null,
+                                "UserId": 1,
                                 "createdAt": "2020-05-06T12:58:23.841Z",
                                 "updatedAt": "2020-05-06T12:58:23.841Z"
                             }
@@ -111,7 +111,7 @@
         ```
 *    Sample Call :
         ```
-        $.ajax({
+        axios({
             url: "/task",
             headers: "token",
             type : "POST",
@@ -122,7 +122,7 @@
                     "assigned"
             },
             success : function(result) {
-                res.status(200).json({
+                res.status(201).json({
                     Task : result
                 })
             }
@@ -158,7 +158,7 @@
                                 "point": 100,
                                 "assigned": "test8",
                                 "category": "backlogs",
-                                "UserId": null,
+                                "UserId": 1,
                                 "createdAt": "2020-05-06T12:58:23.841Z",
                                 "updatedAt": "2020-05-06T12:58:23.841Z"
                             }
@@ -171,7 +171,7 @@
         ```
 *    Sample Call :
         ```
-        $.ajax({
+        axios({
             url: "/task/8",
             headers: "token",
             type : "GET",
@@ -216,7 +216,7 @@
                                 "point": 100,
                                 "assigned": "test8",
                                 "category": "todos",
-                                "UserId": null,
+                                "UserId": 1,
                                 "createdAt": "2020-05-06T12:58:23.841Z",
                                 "updatedAt": "2020-05-06T12:58:23.841Z"
                             }
@@ -229,7 +229,7 @@
         ```
 *    Sample Call :
         ```
-        $.ajax({
+        axios({
             url: "/task/8",
             headers: "token",
             data : {
@@ -278,7 +278,7 @@
         ```
 *    Sample Call :
         ```
-        $.ajax({
+        axios({
             url: "/task/3",
             headers: "token",
             type : "DELETE",
@@ -326,11 +326,11 @@
         ```
 *    Sample Call :
         ```
-        $.ajax({
+        axios({
             url: "/user/register",
-            type : "Post",
+            method : "Post",
             success : function(result) {
-                res.status(200).json({
+                res.status(201).json({
                     User : result
                 })
             }
@@ -363,16 +363,16 @@
         ```
 *    Error Response :
         ```
-        Code :  404
+        Code :  400
         Content : "wrong email/password"
         ```
 *    Sample Call :
         ```
-        $.ajax({
+        axios({
             url: "/user/login",
-            type : "Post",
+            method : "Post",
             success : function(result) {
-                res.status(200).json({
+                res.status(202).json({
                     Token : result
                 })
             }
@@ -389,7 +389,7 @@
 
 *    URL PARAMS
 
-        token : google_token
+        headers : google_token
 
 *    Data PARAMS
 
@@ -409,10 +409,10 @@
         ```
 *    Sample Call :
         ```
-        $.ajax({
+        axios({
             url: "/user/google-login",
             dataType: "json",
-            type : "Post",
+            method : "Post",
             success : function(result) {
                 res.status(200).json({
                     Token : result

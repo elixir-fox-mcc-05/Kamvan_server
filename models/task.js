@@ -23,11 +23,19 @@ module.exports = (sequelize, DataTypes) => {
         notEmpty : true
       }
     },
-    category: DataTypes.STRING,
     UserId: {
       type : DataTypes.INTEGER,
       references : {
         model : "Users",
+        key : "id"
+      },
+      onDelete : "cascade",
+      onUpdate : "cascade"
+    },
+    CategoryId: {
+      type : DataTypes.INTEGER,
+      references : {
+        model : "Categories",
         key : "id"
       },
       onDelete : "cascade",
@@ -37,13 +45,14 @@ module.exports = (sequelize, DataTypes) => {
     sequelize,
     hooks : {
       beforeCreate : (task) => {
-        task.category = "backlogs";
+        task.CategoryId = 1;
       }
     },
     modelName : "Task"
   });
   Task.associate = function(models) {
     Task.belongsTo(models.User);
+    Task.belongsTo(models.Category);
   };
   return Task;
 };

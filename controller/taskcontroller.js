@@ -1,22 +1,18 @@
 "use strict";
 const {Task} = require('../models');
+const {Category} = require("../models");
 
 class TaskController {
     static findAll(req, res, next){
-        const {category} = req.params;
-        Task
-            .findAll({
-                where : {
-                    category,
-                }
-            })
-            .then(task => {
-                if(task){
+        Category
+            .findAll({include : Task})
+            .then(result => {
+                if(result){
                     res.status(200).json({
-                        Task : task
+                        Category : result
                     });
                 } else {
-                    return res.status(404).json({
+                    return next({
                         code : 404,
                         type : "Not Found",
                         msg : "Data not found"
@@ -24,11 +20,7 @@ class TaskController {
                 }
             })
             .catch(err => {
-                return res.status(500).json({
-                    code : 500,
-                    type : "Internal Server Error",
-                    msg : "Something Went Wrong"
-                });
+                return next(err);
             });
     }
     static findOne(req, res, next){
@@ -45,7 +37,7 @@ class TaskController {
                         Task : task
                     });
                 } else {
-                    return res.status(404).json({
+                    return next({
                         code : 404,
                         type : "Not Found",
                         msg : "Data Not Found"
@@ -53,11 +45,7 @@ class TaskController {
                 }
             })
             .catch(err => {
-                res.status(500).json({
-                    code : 500,
-                    type : "Internal Server Error",
-                    msg : "Something Went Wrong"
-                });
+                return next(err);
             });
     }
     static create(req, res, next){
@@ -78,7 +66,7 @@ class TaskController {
                         Task : task
                     });
                 } else {
-                    return res.status(501).json({
+                    return next({
                         code : 501,
                         type : "Not Implemented",
                         msg : "Cannot Create Task"
@@ -86,28 +74,23 @@ class TaskController {
                 }
             })
             .catch(err => {
-                return res.status(500).json({
-                    code : 500,
-                    type : "Internal Server Error",
-                    msg : "Something Went Wrong"
-                });
+                return next(err);
             });
     }
     static edit(req, res, next){
         const {id} = req.params;
-        const {title, descriptions, point, assigned, category} = req.body;
+        const {title, descriptions, point, assigned, CategoryId} = req.body;
         let value;
-        if(!category){
+        if(!CategoryId){
             value = {
                 title,
                 descriptions,
                 point,
                 assigned,
-                category
             };
         } else {
             value = {
-                category,
+                CategoryId
             };
         }
         Task
@@ -122,7 +105,7 @@ class TaskController {
                         Task : task
                     });
                 } else {
-                    return res.status(304).json({
+                    return next({
                         code : 304,
                         type : "Not Modified",
                         msg : "Cannot edit data"
@@ -130,11 +113,7 @@ class TaskController {
                 }
             })
             .catch(err=>{
-                return res.status(500).json({
-                    code : 500,
-                    type : "Internal Server Error",
-                    msg : "Something Went Wrong"
-                });
+                return next(err);
             });
     }
     static delete(req, res, next){
@@ -151,11 +130,7 @@ class TaskController {
                 });
             })
             .catch(err => {
-                return res.status(500).json({
-                    code : 500,
-                    type : "Internal Server Error",
-                    msg : "Something Went Wrong"
-                });
+                return next(err);
             });
     }
 }
