@@ -1,10 +1,12 @@
 # Fancy Todo
 
-### Return json data for all Task by category
+##       URL DEPLOY : https://mysterious-basin-64968.herokuapp.com
+
+### Return json data for all Category
 
 *    Url
 
-        /task/:category
+        /task/
 
 *    Method:
 
@@ -22,31 +24,37 @@
         ```
         Code : 200        
         Content : {
-                    "Task": [
+                        "Category": [
+                        {
+                        "id": 1,
+                        "name": "Backlogs",
+                        "createdAt": "2020-05-11T18:15:13.837Z",
+                        "updatedAt": "2020-05-11T18:15:13.837Z",
+                        "Tasks": [
                                 {
-                                "id": 7,
-                                "title": "corona AI",
-                                "descriptions": "Doing Something",
-                                "point": 100,
-                                "assigned": "test7",
-                                "category": "backlogs",
+                                "id": 4,
+                                "title": "Masih Penasaran",
+                                "descriptions": "HAJAR KAN",
+                                "point": 1000000000,
+                                "assigned": "Yodi",
                                 "UserId": 1,
-                                "createdAt": "2020-05-06T12:58:23.841Z",
-                                "updatedAt": "2020-05-06T12:58:23.841Z"
+                                "CategoryId": 1,
+                                "createdAt": "2020-05-11T18:25:50.359Z",
+                                "updatedAt": "2020-05-11T18:25:50.359Z"
                                 },
                                 {
-                                "id": 8,
-                                "title": "corona AI",
-                                "descriptions": "Doing Something",
-                                "point": 100,
-                                "assigned": "test8",
-                                "category": "backlogs",
+                                "id": 3,
+                                "title": "Ok, Start CMS",
+                                "descriptions": "Jangan Lemot Yod",
+                                "point": 1000000,
+                                "assigned": "Yodi",
                                 "UserId": 1,
-                                "createdAt": "2020-05-06T12:58:23.841Z",
-                                "updatedAt": "2020-05-06T12:58:23.841Z"
-                                }
+                                "CategoryId": 1,
+                                "createdAt": "2020-05-11T18:21:23.775Z",
+                                "updatedAt": "2020-05-11T18:21:23.775Z"
+                                },
                         ]
-                    }
+                ]
         ```
 *    Error Response :
         ```
@@ -56,12 +64,12 @@
 *    Sample Call :
         ```
         axios({
-            url: "/task/backlogs",
+            url: "/task/",
             headers: "token",
             type : "GET",
             success : function(result) {
                 res.status(200).json({
-                    Task : result
+                    Category : result
                 })
             }
         });
@@ -92,16 +100,16 @@
         Code : 201       
         Content : {
                     "Task": {
-                                "id": 8,
-                                "title": "corona AI",
-                                "descriptions": "Doing Something",
-                                "point": 100,
-                                "assigned": "test8",
-                                "category": "backlogs",
+                                "id": 3,
+                                "title": "Ok, Start CMS",
+                                "descriptions": "Jangan Lemot Yod",
+                                "point": 1000000,
+                                "assigned": "Yodi",
                                 "UserId": 1,
-                                "createdAt": "2020-05-06T12:58:23.841Z",
-                                "updatedAt": "2020-05-06T12:58:23.841Z"
-                            }
+                                "CategoryId": 1,
+                                "createdAt": "2020-05-11T18:21:23.775Z",
+                                "updatedAt": "2020-05-11T18:21:23.775Z"
+                                }
                     }
         ```
 *    Error Response :
@@ -152,17 +160,17 @@
         Code : 200
         Content :   {
                         "Task": {
-                                "id": 8,
-                                "title": "corona AI",
-                                "descriptions": "Doing Something",
-                                "point": 100,
-                                "assigned": "test8",
-                                "category": "backlogs",
+                                "id": 3,
+                                "title": "Ok, Start CMS",
+                                "descriptions": "Jangan Lemot Yod",
+                                "point": 1000000,
+                                "assigned": "Yodi",
                                 "UserId": 1,
-                                "createdAt": "2020-05-06T12:58:23.841Z",
-                                "updatedAt": "2020-05-06T12:58:23.841Z"
-                            }
-                    }
+                                "CategoryId": 1,
+                                "createdAt": "2020-05-11T18:21:23.775Z",
+                                "updatedAt": "2020-05-11T18:21:23.775Z"
+                        }
+                }
         ```
 *    Error Response :
         ```
@@ -182,7 +190,7 @@
             }
         });
         ```
-### Return json data after edit
+### Return json data after edit item or changing category
 
 *    Url
 
@@ -203,23 +211,23 @@
         description : String
         point : Integer
         assigned : String
-        category : String
+        CategoryId : Integer
         ```
 *    Succes Response
         ```
         Code : 202
         Content :   {
                         "Task": {
-                                "id": 8,
-                                "title": "corona AI",
-                                "descriptions": "Doing Something",
-                                "point": 100,
-                                "assigned": "test8",
-                                "category": "todos",
+                                "id": 3,
+                                "title": "Ok, Start CMS",
+                                "descriptions": "Jangan Lemot Yod",
+                                "point": 1000000,
+                                "assigned": "Yodi",
                                 "UserId": 1,
-                                "createdAt": "2020-05-06T12:58:23.841Z",
-                                "updatedAt": "2020-05-06T12:58:23.841Z"
-                            }
+                                "CategoryId": 1,
+                                "createdAt": "2020-05-11T18:21:23.775Z",
+                                "updatedAt": "2020-05-11T18:21:23.775Z"
+                        }
                     }
         ```
 *    Error Response :
