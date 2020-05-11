@@ -1,6 +1,7 @@
 const {User, Task} = require('../models')
 const {comparePassword} = require('../helpers/bcrypt')
 const {generateToken} = require('../helpers/jwt')
+const verificationGoogle = require('../helpers/Oauth')
 
 
 class AllController{
@@ -54,6 +55,45 @@ class AllController{
                         code: 400
                     }
                 }
+            })
+            .catch(err => {
+                next(err)
+            })
+    }
+
+    static googleLogin(req, res, next){
+        let {google_token} = req.headers
+        let email = null
+        let newUser= false
+
+        verificationGoogle(google_token)
+            .then(payload => {
+                email = payload.email
+                return User.findOne({where: {email}})
+            })
+            .then(user => {
+                if(user){
+                    return user
+                } else {
+                    newUser = true
+                    return User.create({
+                        email,
+                        password: process.env.DEFAULT_GOOGLE_PASS
+                    })
+                }
+            })
+            .then(user => {
+                let code = newUser ? 201 : 200
+                let { id, email, password } = user
+                let access_token = generateToken({
+                    id,
+                    email,
+                    password
+                })
+
+                res.status(code).json({
+                    access_token
+                })
             })
             .catch(err => {
                 next(err)

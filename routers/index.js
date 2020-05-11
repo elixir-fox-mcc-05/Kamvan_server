@@ -5,7 +5,7 @@ const authorization = require('../middleware/authorization')
 
 router.post('/register', allController.register)
 router.post('/login', allController.Login)
-// router.post('/google-login', allController.googleLogin)
+router.post('/google-login', allController.googleLogin)
 router.use(authentication)
 router.post('/task', allController.createTask)
 router.get('/task',allController.readTask)
