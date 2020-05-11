@@ -1,3 +1,11 @@
+Deploy link  = https://g-kan-ban.firebaseapp.com/
+Env ={
+  PORT = 3000
+SECRET = HACKTIV8
+SECRET_GMAILID = qFeVd9tbl1xUfnp622uf1DMJ
+SECRET_PASS = test
+}
+
 ## **REGISTER**
 
 * **URL:**
