@@ -44,7 +44,12 @@ module.exports = (sequelize, DataTypes) => {
     }
   }, {
     sequelize,
-    modelName: "Task"
+    modelName: "Task",
+    hooks: {
+      beforeCreate(task) {
+        if (!task.description) task.description = "No description"
+      }
+    }
   });
   Task.associate = function(models) {
     Task.belongsTo(models.User)

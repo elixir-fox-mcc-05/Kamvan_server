@@ -7,16 +7,17 @@ module.exports = (err, req, res, next) => {
     } else if (err.name === "SequelizeValidationError") {
         let errors = err.errors.map(element => {
             msg: element.message
-            loc: "@sequelize"
         })
         res.status(400).json({
             code: 400,
             type: "Bad Request",
+            loc: "@sequelize",
             errors
         })
     } else if (err.name === "SequelizeUniqueConstraintError") {
         res.status(400).json({
-            msg: "Email has been registered"
+            msg: "Email has been registered",
+            loc: "@sequelize"
         })
     } else {
         res.status(err.code || 500).json({
