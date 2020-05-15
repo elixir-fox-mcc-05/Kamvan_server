@@ -1,4 +1,4 @@
-if (process.env.NODE_ENV == 'dev') {
+if (process.env.NODE_ENV == 'development') {
   require('dotenv').config()
 }
 const PORT = process.env.PORT || 3000

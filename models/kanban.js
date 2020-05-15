@@ -46,7 +46,7 @@ module.exports = (sequelize, DataTypes) => {
   });
 
   Kanban.associate = function(models) {
-    Kanban.belongsTo(models.User, { foreignKey: 'userId' })
+    Kanban.belongsTo(models.User, { foreignKey: "userId", targetKey: "id" });
   };
   return Kanban;
 };

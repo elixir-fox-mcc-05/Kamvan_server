@@ -1,12 +1,16 @@
-const { Kanban } = require('../models')
+const { Kanban, User } = require('../models')
 
 class KanbanController {
 
   static show(req, res, next) {
     let userId = req.currentUserId
-    Kanban.findAll({ where: { userId: userId } })
+    console.log('masuk findall');
+    Kanban.findAll({
+      include: [{model: User, attributes: ['email']}]
+    })
       .then((result) => {
-        return res.status(200).json({ result })
+        console.log(result);
+        return res.status(200).json(result)
       })
       .catch((err) => {
         next(err)
