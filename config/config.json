@@ -1,0 +1,21 @@
+{
+  "development": {
+    "username": "ahmadalhq",
+    "password": "empatpuluh6",
+    "database": "kamvan_db",
+    "host": "localhost",
+    "dialect": "postgres",
+    "operatorsAliases": false
+  },
+  "test": {
+    "username": "ahmadalhq",
+    "password": "empatpuluh6",
+    "database": "kamvan_db",
+    "host": "localhost",
+    "dialect": "postgres",
+    "operatorsAliases": false
+  },
+  "production": {
+    "use_env_variable": "DATABASE_URL"
+  }
+}
