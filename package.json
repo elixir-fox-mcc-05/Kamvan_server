@@ -1,18 +1,19 @@
 {
-  "name": "Kamvan_Server",
+  "name": "kamvan_server",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "set NODE_ENV=development&& nodemon app.js"
+    "dev": "set NODE_ENV=development&& nodemon app.js",
+    "start": "node app.js"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/amirfaisalz/Kamvan_Server.git"
   },
   "keywords": [],
-  "author": "",
+  "author": "Amir Faisal Zamzami",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/amirfaisalz/Kamvan_Server/issues"
