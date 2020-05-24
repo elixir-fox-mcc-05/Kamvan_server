@@ -95,7 +95,7 @@ class TaskController {
     })
       .then((result) => {
         res.status(200).json({
-          msg: `task with id ${id} succesfully updated`,
+          msg: `task with id ${id} succesfully moved`,
           task: result[1][0],
         });
       })
