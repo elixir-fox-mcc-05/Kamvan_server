@@ -47,7 +47,8 @@ class ControllerUser{
                         email: result.email
                     })
                     res.status(200).json({
-                        token
+                        token,
+                        id: result.id
                     })
                 }
                 else{
@@ -108,7 +109,8 @@ class ControllerUser{
             });
     
             res.status(code).json({
-              token
+              token,
+              id: user.id
             });
           })
           .catch(err => {
