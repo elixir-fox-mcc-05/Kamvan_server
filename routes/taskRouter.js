@@ -8,7 +8,7 @@ router.use(authentication)
 router.post('/', TaskController.createTask);
 router.get('/', TaskController.readAllTask);
 router.get('/:taskId', authorization, TaskController.searchTask); 
-router.put('/:taskId', authorization, TaskController. updateTask);
+router.put('/:taskId', authorization, TaskController.updateTask);
 router.delete('/:taskId', authorization, TaskController.deleteTask);
 
 module.exports = router;
