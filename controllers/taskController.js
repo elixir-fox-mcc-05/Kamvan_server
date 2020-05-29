@@ -1,6 +1,9 @@
 const { Task,User } = require('../models')
 
-class TaskController {
+
+module.exports = function(io){
+    
+    class TaskController {
 
     static add(req, res) {
         
@@ -9,6 +12,7 @@ class TaskController {
         Task
             .create({ title, points, description,category, organization : req.SelectOrganization, UserId : req.LoginId })
             .then(data => {
+                io.emit('log',`${req.name} add new task: ${data.title}`)
                 // console.log('add nyo')
                 res.status(201).json({
                     id : data.id,
@@ -75,7 +79,8 @@ class TaskController {
                 return Task.findByPk(req.params.id)
             })
             .then(data => {
-                console.log(data)
+                io.emit('log',`${req.name} update task: ${data.title}`)
+                // console.log(data)
                 res.status(200).json({
                     id: data.id,
                     title : data.title,
@@ -100,6 +105,7 @@ class TaskController {
                 return Task.destroy({where : {id : req.params.id},returning : true})
             })
             .then(data => {
+                io.emit('log',`${req.name} delete task: ${results.title}`)
                 console.log('deleted?')
                 res.status(200).json({
                     task : results
@@ -113,4 +119,6 @@ class TaskController {
     }
 }
 
-module.exports = TaskController
+return TaskController
+
+}
