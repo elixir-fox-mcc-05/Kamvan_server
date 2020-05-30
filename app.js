@@ -32,7 +32,13 @@ io.on('connection', function(socket) {
     // console.log("session at socket.io connection:\n", socket.request.session);
     // socket.request.session.socketio = socket.id;
     // socket.request.session.save();
+
+    socket.on('disconnect', function(reason){
+        socket.disconnect()
+        // io.emit('log','disconnected')
+    })
 });
+
 
 
 // Start the server
