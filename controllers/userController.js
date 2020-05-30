@@ -8,7 +8,7 @@ class UserController{
     static login(req,res,next){
         let {email,password} = req.body
         // console.log(email)
-        User
+        User 
             .findOne({where : {email}})
             .then(data => {
                 if(data) {
