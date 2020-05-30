@@ -1,5 +1,7 @@
+module.exports = function(io){
+
 const router = require('express').Router()
-const TaskController = require('../controllers/taskController')
+const TaskController = require('../controllers/taskController')(io)
 const authorization = require('../middleware/authorization')
 const authentication = require('../middleware/authentication')
 
@@ -10,4 +12,5 @@ router.get('/:id',TaskController.select)
 router.delete('/delete/:id',authorization, TaskController.delete)
 router.put('/update/:id',authorization, TaskController.update)
 
-module.exports = router
+return router
+}
