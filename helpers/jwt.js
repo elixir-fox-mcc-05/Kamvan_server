@@ -8,5 +8,5 @@ function generateToken (data){
 function verifyToken (data){
     return jwt.verify(data,process.env.SECRET)
 } 
-
+ 
 module.exports = {generateToken, verifyToken}
