@@ -18,7 +18,7 @@ module.exports = function (io) {
             if (password == data.password) {
               let token = generateToken({ id:data.id, organization:data.organization})
               // io.emit('message',token)
-              io.emit('log',{log: `${data.first_name} has loggedin`})
+              io.emit('log',`${data.first_name} has loggedin`)
               res.status(200).json({
                 first_name: data.first_name,
                 token
