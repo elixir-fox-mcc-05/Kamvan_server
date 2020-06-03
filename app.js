@@ -42,6 +42,6 @@ io.on('connection', function(socket) {
 
 
 // Start the server
-server.listen(3000, function(){
+server.listen(3000 || process.env.PORT, function(){
  console.log('App listening at http://localhost:3000');
 });
