@@ -3,7 +3,7 @@ require('dotenv').config();
 const express = require('express');
 const app = express();
 const cors = require('cors');
-const port = 3000;
+const PORT = processs.env.PORT || 3000;
 const router = require('./routes/index.js');
 const errHandler = require('./middlewares/errHandler.js');
 
@@ -13,6 +13,6 @@ app.use(express.json());
 app.use(router);
 app.use(errHandler);
 
-app.listen(port, () => {
-    console.log(`listening to port:`, port);
+app.listen(PORT, () => {
+    console.log(`listening to port:`, PORT);
 })
