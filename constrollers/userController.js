@@ -1,6 +1,7 @@
 const { User } = require('../models/index.js');
 const { checkPassword } = require('../helpers/bcryptjs.js');
 const { generateToken } = require('../helpers/jwt.js');
+const verifyGoogle = require('../helpers/googleOauth')
 
 class UserController {
     // router.post('/register', UserController.registerUser);
@@ -64,6 +65,46 @@ class UserController {
         .catch(err => {
             next(err)
         })
+    }
+
+    // router.post('/google-login', UserController.googleLogin)
+    static googleLogin(req, res, next){
+        let googleToken = req.body.headers.googleToken
+        let email = null;
+        let newUser = false;
+        verifyGoogle(googleToken)
+            .then(payload => {
+                email = payload.email
+                let options = {
+                    where: {email}
+                }
+                return User.findOne(options)
+            })
+            .then(user => {
+                if(user){
+                    return user
+                }
+                else {
+                    newUser = true;
+                    let input = {
+                        email,
+                        password: process.env.DEFAULT_GOOGLE_PASS
+                    }
+                    return User.create(input);
+                }
+            })
+            .then(data => {
+                let code = newUser ? 201 : 200;
+                let token = generateToken({
+                    id: data.id,
+                    email: data.email,
+                    organization: data.organization
+                })
+                res.status(code).json({token, id:data.id, email:data.email, organization: data.organization});
+            })
+            .catch(err => {
+                next(err)
+            })
     }
 }
 
