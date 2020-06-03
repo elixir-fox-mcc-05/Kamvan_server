@@ -4,6 +4,7 @@ var express = require('express');
 var http = require('http');
 var app = express();
 // var server = express.createServer()
+const port = process.env.PORT || 3000
 var server = http.createServer(app);
 var io = require('socket.io').listen(server);
 const cors = require('cors')
@@ -42,6 +43,6 @@ io.on('connection', function(socket) {
 
 
 // Start the server
-server.listen(3000 || process.env.PORT, function(){
- console.log('App listening at http://localhost:3000');
+server.listen(port, function(){
+ console.log('App listening at', port);
 });
