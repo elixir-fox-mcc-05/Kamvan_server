@@ -60,7 +60,7 @@ module.exports = (sequelize, DataTypes) => {
     modelName: 'User',
     hooks: {
       beforeCreate: (user) => {
-        console.log(user._previousDataValues)
+        // console.log(user._previousDataValues)
         if (user.last_name == '') {
           user.last_name == user.first_name
         }

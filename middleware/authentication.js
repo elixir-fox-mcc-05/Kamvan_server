@@ -1,20 +1,21 @@
 const {verifyToken} = require('../helpers/jwt')
 const {User} = require('../models')
 function authentication(req,res,next){
-    console.log(req.headers.token)
+    // console.log(req.headers.token)
     let token = req.headers.token
-    try{
+    // try{
         if(token){
             // console.log('liu')
             let decodeid = verifyToken(token)
-            console.log(decodeid)
-            let {id} = decodeid.data
+            // console.log(decodeid)
+            let {id} = decodeid
             
             User
                 .findByPk(id)
                 .then(data => {
                     if(data){
                         // console.log(data)
+                        req.name = `${data.first_name} ${data.last_name}`
                         req.LoginId = data.id
                         req.SelectOrganization = data.organization 
                         next()
@@ -35,10 +36,13 @@ function authentication(req,res,next){
                 err : 'please login first'
             })
         }
-    }
-    catch{
-        throw err
-    }
+    // }
+    // catch{
+        // throw 
+        // res.status(404).json({
+        //     err : 'please login first'
+        // })
+    // }
 }
 
 module.exports = authentication
