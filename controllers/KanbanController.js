@@ -34,14 +34,6 @@ class KanbanController {
             }
         }
         createNewKanban()
-        // Kanban
-        //     .create(values)
-        //         .then(kanban => {
-        //             res.status(201).json(kanban);
-        //         })
-        //         .catch(err => {
-        //             next(err)
-        //         })
     }
 
     static findAll(req, res, next) {
@@ -93,14 +85,6 @@ class KanbanController {
             }
         }
         updateKanban()
-        // Kanban
-        //     .update(values, options)
-        //         .then(kanban => {
-        //             res.status(200).json(kanban[1][0]);
-        //         })
-        //         .catch(err => {
-        //             next(err);
-        //         })
     }
 
     static updateCategory(req, res, next) {
@@ -132,14 +116,6 @@ class KanbanController {
             }
         }
         updateCategory()
-        // Kanban
-        //     .update(values, options)
-        //         .then(kanban => {
-        //             res.status(200).json(kanban[1][0]);
-        //         })
-        //         .catch(err => {
-        //             next(err);
-        //         })
     }
 
     static delete(req, res, next) {
@@ -167,14 +143,6 @@ class KanbanController {
             }
         }
         deleteKanban()
-        // Kanban
-        //     .destroy(options)
-        //         .then(kanban => {
-        //             res.status(200).json('Successfully delete kanban');
-        //         })
-        //         .catch(err => {
-        //             next(err);
-        //         })
     }
 }
 

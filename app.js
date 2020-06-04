@@ -23,18 +23,6 @@ app.use(function (req, res, next) {
 app.use('/', route);
 app.use(ErrorHandler);
 
-io.on('connection', function (socket) {
-    console.log('Client Enter Server')
-
-    // socket.on('user-connect', function (data) {
-    //     console.log(data)
-    // })
-})
-
 server.listen(port, () => {
     console.log(`Listening to port ${port}`)
 })
-
-// app.listen(port, () => {
-//     console.log(`listening to port ${port}`);
-// });
