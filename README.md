@@ -184,7 +184,7 @@
   
   * **Code:** 200 <br />
     **Content:** `
-        {
+        [{
             "id": 8,
             "title": "Functional Design",
             "description": "Build fd for login feature",
@@ -194,7 +194,7 @@
             "organization": "Hacktiv8",
             "updatedAt": "2020-05-07T11:31:00.284Z",
             "createdAt": "2020-05-07T11:31:00.284Z"
-        }
+        }]
     `
  
 * **Error Response:**

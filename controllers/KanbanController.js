@@ -15,21 +15,40 @@ class KanbanController {
             UserId, 
             organization
         };
-        Kanban
-            .create(values)
-                .then(kanban => {
-                    res.status(201).json(kanban);
+
+        async function createNewKanban () {
+            try {
+                const newKanban = await Kanban.create(values) 
+
+                const kanban = await Kanban.findAll({
+                    where: {
+                        organization: req.currentOrganization
+                    },
+                    order: [[ 'id', 'asc']]
                 })
-                .catch(err => {
-                    next(err)
-                })
+                req.io.emit('fetch-kanban', kanban)
+                res.status(201).json(newKanban)
+            }
+            catch (err) {
+                next(err)
+            }
+        }
+        createNewKanban()
+        // Kanban
+        //     .create(values)
+        //         .then(kanban => {
+        //             res.status(201).json(kanban);
+        //         })
+        //         .catch(err => {
+        //             next(err)
+        //         })
     }
 
     static findAll(req, res, next) {
         const options = {
-            OrderBy: 'id',
+            order: [[ 'id', 'asc']],
             where: {
-                organization: 'Hacktiv8'
+                organization: req.currentOrganization
             }
         };
         Kanban
@@ -56,14 +75,32 @@ class KanbanController {
             description,
             point, 
         };
-        Kanban
-            .update(values, options)
-                .then(kanban => {
-                    res.status(200).json(kanban[1][0]);
+        async function updateKanban () {
+            try {
+                const updatedKanban = await Kanban.update(values, options)
+
+                const kanban = await Kanban.findAll({
+                    where: {
+                        organization: req.currentOrganization
+                    },
+                    order: [[ 'id', 'asc']]
                 })
-                .catch(err => {
-                    next(err);
-                })
+                req.io.emit('fetch-kanban', kanban)
+                res.status(200).json(updatedKanban[1][0])
+            }
+            catch (err) {
+                next(err)
+            }
+        }
+        updateKanban()
+        // Kanban
+        //     .update(values, options)
+        //         .then(kanban => {
+        //             res.status(200).json(kanban[1][0]);
+        //         })
+        //         .catch(err => {
+        //             next(err);
+        //         })
     }
 
     static updateCategory(req, res, next) {
@@ -78,14 +115,31 @@ class KanbanController {
         const values = {
             status
         };
-        Kanban
-            .update(values, options)
-                .then(kanban => {
-                    res.status(200).json(kanban[1][0]);
+        async function updateCategory () {
+            try {
+                const updatedKanban = await Kanban.update(values, options)
+                const kanban = await Kanban.findAll({
+                    where: {
+                        organization: req.currentOrganization,
+                    },
+                    order: [[ 'id', 'asc']]
                 })
-                .catch(err => {
-                    next(err);
-                })
+                req.io.emit('fetch-kanban', kanban)
+                res.status(200).json(updatedKanban[1][0])
+            }
+            catch (err) {
+                next(err)
+            }
+        }
+        updateCategory()
+        // Kanban
+        //     .update(values, options)
+        //         .then(kanban => {
+        //             res.status(200).json(kanban[1][0]);
+        //         })
+        //         .catch(err => {
+        //             next(err);
+        //         })
     }
 
     static delete(req, res, next) {
@@ -95,14 +149,32 @@ class KanbanController {
                 id: kanbanId
             }
         };
-        Kanban
-            .destroy(options)
-                .then(kanban => {
-                    res.status(200).json('Successfully delete kanban');
+        async function deleteKanban () {
+            try {
+                const deletedKanban = await Kanban.destroy(options)
+                
+                const kanban = await Kanban.findAll({
+                    where: {
+                        organization: req.currentOrganization
+                    },
+                    order: [[ 'id', 'asc']]
                 })
-                .catch(err => {
-                    next(err);
-                })
+                req.io.emit('fetch-kanban', kanban)
+                res.status(200).json('Successfully delete kanban')
+            }
+            catch (err) {
+                next(err)
+            }
+        }
+        deleteKanban()
+        // Kanban
+        //     .destroy(options)
+        //         .then(kanban => {
+        //             res.status(200).json('Successfully delete kanban');
+        //         })
+        //         .catch(err => {
+        //             next(err);
+        //         })
     }
 }
 
