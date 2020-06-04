@@ -1,7 +1,7 @@
 const {User} = require("../models/index.js")
 const {createToken} = require("../helpers/jwt.js")
 const {comparePassword} = require("../helpers/bcrypt.js")
-const {OAuth2Client} = require('google-auth-library');
+// const {OAuth2Client} = require('google-auth-library');
 
 class userController {
     static register(req,res,next){
@@ -75,19 +75,11 @@ class userController {
         })
     }
     static googleSign(req,res,next){
-        const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
-        let email = ""
-        client.verifyIdToken({
-            idToken: req.body.id_token,
-            audience: process.env.GOOGLE_CLIENT_ID
-        })
-        .then(ticket =>{
-            email = ticket.getPayload().email
-            return User.findOne({
-                where:{
-                    email: email
-                }
-            })
+        let { email, password } = req.body
+        User.findOne({
+            where:{
+                email: email
+            }
         })
         .then(data =>{
             if(data){
