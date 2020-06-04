@@ -24,7 +24,11 @@ class KanbanController {
                     where: {
                         organization: req.currentOrganization
                     },
-                    order: [[ 'id', 'asc']]
+                    order: [[ 'id', 'asc']],
+                    include: {
+                        model: User,
+                        attributes: [ 'name' ]
+                    }
                 })
                 req.io.emit('fetch-kanban', kanban)
                 res.status(201).json(newKanban)
@@ -41,6 +45,10 @@ class KanbanController {
             order: [[ 'id', 'asc']],
             where: {
                 organization: req.currentOrganization
+            },
+            include: {
+                model: User,
+                attributes: [ 'name' ]
             }
         };
         Kanban
@@ -75,7 +83,11 @@ class KanbanController {
                     where: {
                         organization: req.currentOrganization
                     },
-                    order: [[ 'id', 'asc']]
+                    order: [[ 'id', 'asc']],
+                    include: {
+                        model: User,
+                        attributes: [ 'name' ]
+                    }
                 })
                 req.io.emit('fetch-kanban', kanban)
                 res.status(200).json(updatedKanban[1][0])
@@ -106,7 +118,11 @@ class KanbanController {
                     where: {
                         organization: req.currentOrganization,
                     },
-                    order: [[ 'id', 'asc']]
+                    order: [[ 'id', 'asc']],
+                    include: {
+                        model: User,
+                        attributes: [ 'name' ]
+                    }
                 })
                 req.io.emit('fetch-kanban', kanban)
                 res.status(200).json(updatedKanban[1][0])
@@ -133,7 +149,11 @@ class KanbanController {
                     where: {
                         organization: req.currentOrganization
                     },
-                    order: [[ 'id', 'asc']]
+                    order: [[ 'id', 'asc']],
+                    include: {
+                        model: User,
+                        attributes: [ 'name' ]
+                    }
                 })
                 req.io.emit('fetch-kanban', kanban)
                 res.status(200).json('Successfully delete kanban')
