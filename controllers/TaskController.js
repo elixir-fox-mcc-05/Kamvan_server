@@ -7,7 +7,10 @@ class TaskController {
       include: {
         model: User,
         attributes: ['id', 'email']
-      }
+      },
+      order: [
+        ['createdAt', 'DESC']
+      ]
     })
       .then(data => {
         res.status(200).json({
