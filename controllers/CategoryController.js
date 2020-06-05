@@ -6,6 +6,9 @@ class CategoryController {
       include: {
         model: Task
       },
+      order: [
+        ['id', 'ASC']
+      ]
     })
       .then(result => {
         res.status(200).json({
