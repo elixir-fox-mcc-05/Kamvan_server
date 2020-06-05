@@ -4,7 +4,10 @@ class CategoryController {
   static findAll(req, res, next) {
     Category.findAll({
       include: {
-        model: Task
+        model: Task,
+        order: [
+          ['createdAt', 'DESC']
+        ]
       },
       order: [
         ['id', 'ASC']
