@@ -2,7 +2,11 @@ const { Task } = require('../models');
 
 const authorization = (req, res, next) => {
   let { id } = req.params;
+  if (!title && !description && !points && !assigned_to) {
+    next();
+  }
 
+  if (req.body )
   Task.findByPk(id)
     .then(result => {
       if(result) {
