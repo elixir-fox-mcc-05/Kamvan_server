@@ -4,15 +4,13 @@ const authorization = (req, res, next) => {
   let { id } = req.params;
   let { title, description, points, assigned_to } = req.body;
   if (!title && !description && !points && !assigned_to) {
-    next();
+    return next();
   }
-
-  if (req.body )
   Task.findByPk(id)
     .then(result => {
       if(result) {
         if(result.UserId == req.UserId) {
-          next();
+          return next();
         } else {
           return next({
             code: 401,
