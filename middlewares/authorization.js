@@ -2,6 +2,7 @@ const { Task } = require('../models');
 
 const authorization = (req, res, next) => {
   let { id } = req.params;
+  let { title, description, points, assigned_to } = req.body;
   if (!title && !description && !points && !assigned_to) {
     next();
   }
