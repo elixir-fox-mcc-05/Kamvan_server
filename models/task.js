@@ -16,12 +16,17 @@ module.exports = (sequelize, DataTypes) => {
         }
       }
     },
+    description: {
+      type: DataTypes.STRING,
+      defaultValue: 'No description'
+    },
     category: {
       type: DataTypes.STRING,
       defaultValue: 'backlog'
     },
     assignedTo: DataTypes.STRING,
     UserId: DataTypes.INTEGER,
+    author: DataTypes.STRING,
     organization: DataTypes.STRING
   }, {
     sequelize,

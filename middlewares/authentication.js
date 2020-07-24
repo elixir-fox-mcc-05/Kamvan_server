@@ -13,6 +13,7 @@ function authentication(req, res, next){
             if(result){
                 req.currentUserId = result.id
                 req.currentOrganization = result.organization
+                req.currentUserEmail = result.email
                 next()
             }
             else {

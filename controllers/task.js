@@ -4,18 +4,24 @@ class TaskController{
     static create(req, res, next){
         const newTask = {
             title: req.body.title,
+            description: req.body.description,
             assignedTo: req.body.assignedTo,
             organization: req.currentOrganization,
             UserId: req.currentUserId,
+            author: req.currentUserEmail
         }
         Task.create(newTask)
         .then(result => {
+            console.log(result);
+            
             return res.status(201).json({
-                msg: "New Task Successfully created",
+                msg: "New Task Successfully created new",
                 task: {
                     id: result.id,
                     title : result.title,
+                    description: result.description,
                     category: result.category,
+                    author: result.author,
                     assignedTo: result.assignedTo,
                     UserId: result.UserId,
                     organization: result.organization

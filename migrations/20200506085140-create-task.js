@@ -11,6 +11,9 @@ module.exports = {
       title: {
         type: Sequelize.STRING
       },
+      description: {
+        type: Sequelize.STRING
+      },
       category: {
         type: Sequelize.STRING
       },
@@ -19,6 +22,9 @@ module.exports = {
       },
       UserId: {
         type: Sequelize.INTEGER
+      },
+      author: {
+        type: Sequelize.STRING
       },
       organization: {
         type: Sequelize.STRING
