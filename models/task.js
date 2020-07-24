@@ -30,7 +30,14 @@ module.exports = (sequelize, DataTypes) => {
     organization: DataTypes.STRING
   }, {
     sequelize,
-    modelName: 'Task'
+    modelName: 'Task',
+    hooks: {
+      beforeCreate(task, options){
+        if(task.description == undefined || task.description == '' ) {
+          task.description = 'No Description'
+        }
+      }
+    }
   })
 
   Task.associate = function(models) {

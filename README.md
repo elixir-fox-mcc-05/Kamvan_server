@@ -1,6 +1,7 @@
 # Kamvan_server
 
 Postman: https://documenter.getpostman.com/view/10895410/Szme3xGp
+Link deploy server: https://fierce-reef-02367.herokuapp.com
 
 **User Registration**
 ----

@@ -12,8 +12,6 @@ class TaskController{
         }
         Task.create(newTask)
         .then(result => {
-            console.log(result);
-            
             return res.status(201).json({
                 msg: "New Task Successfully created new",
                 task: {
@@ -147,9 +145,7 @@ class TaskController{
     }
 
     static updateCategory(req, res, next){
-        console.log('masuk update one')
         const { id, category } = req.body
-        console.log(id, category)
         return Task.update({ 
             category: category 
         }, { 
